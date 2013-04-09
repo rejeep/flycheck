@@ -1,0 +1,503 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- This manual is for Flycheck.
+
+Copyright (C) 2013 Sebastian Wiesner
+
+Permission is granted to copy, distribute and/or modify this document
+  under the terms of the GNU Free Documentation License, Version 1.3 or
+  any later version published by the Free Software Foundation; with no
+  Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+  copy of the license is included in the section entitled "GNU Free
+  Documentation License". -->
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>The Flycheck manual: Usage</title>
+
+<meta name="description" content="The Flycheck manual: Usage">
+<meta name="keywords" content="The Flycheck manual: Usage">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="index.html#Top" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html#Top" rel="up" title="Top">
+<link href="Extending.html#Extending" rel="next" title="Extending">
+<link href="Introduction.html#Activation" rel="previous" title="Activation">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="flycheck.css">
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Usage"></a>
+<div class="header">
+<p>
+Next: <a href="Extending.html#Extending" accesskey="n" rel="next">Extending</a>, Previous: <a href="Introduction.html#Introduction" accesskey="p" rel="previous">Introduction</a>, Up: <a href="index.html#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Usage-1"></a>
+<h2 class="chapter">2 Usage</h2>
+
+<p>This chapter explains the usage of Flycheck.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="#Syntax-checking" accesskey="1">Syntax checking</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How syntax is checked
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Selection" accesskey="2">Selection</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How syntax checkers are selected
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Configuration" accesskey="3">Configuration</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to configure individual syntax checkers
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Reporting" accesskey="4">Reporting</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How syntax warnings and errors are reported
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Navigation" accesskey="5">Navigation</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to navigate syntax warnings and errors
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Mode-line" accesskey="6">Mode line</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How status information is displayed in the mode
+                                 line
+</td></tr>
+</table>
+
+<hr>
+<a name="Syntax-checking"></a>
+<div class="header">
+<p>
+Next: <a href="#Selection" accesskey="n" rel="next">Selection</a>, Previous: <a href="#Usage" accesskey="p" rel="previous">Usage</a>, Up: <a href="#Usage" accesskey="u" rel="up">Usage</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Syntax-checking-1"></a>
+<h3 class="section">2.1 Syntax checking</h3>
+
+<p>In <code>flycheck-mode</code> the buffer is automatically checked on the fly
+when
+</p>
+<ul>
+<li> the file is saved,
+</li><li> or if new lines are inserted.
+</li></ul>
+
+<p>You can also check the buffer manually:
+</p>
+<dl compact="compact">
+<dt><kbd>C-c ! c</kbd></dt>
+<dt><kbd>M-x flycheck-buffer</kbd></dt>
+<dd><a name="index-flycheck_002dbuffer"></a>
+<p>Start a syntax check in the current buffer.
+</p></dd>
+</dl>
+
+<p>Each syntax check is comprised of the following steps:
+</p>
+<ol>
+<li> Select a suitable syntax checker.  See <a href="#Selection">Selection</a>, for more
+information on how syntax checkers are selected.
+</li><li> Copy the contents of the buffer to be checked to a temporary file.
+</li><li> Execute the syntax checker tool(s).
+</li><li> Parse the output of the tool, and report all errors and warnings.
+See <a href="#Reporting">Reporting</a>, for more information.
+</li><li> Run hooks in <code>flycheck-after-syntax-check-hook</code>.
+</li></ol>
+
+<dl>
+<dt><a name="index-flycheck_002dafter_002dsyntax_002dcheck_002dhook"></a>User Option: <strong>flycheck-after-syntax-check-hook</strong></dt>
+<dd><p>This variable is a list of function to execute after a syntax check is
+completed, including all chained syntax checkers.
+</p>
+<p>By the time these functions are called, all errors and warnings are
+already reported.  See <a href="#Reporting">Reporting</a>, for more information about error
+reporting.
+</p>
+<p>This variable is a normal hook. See <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Hooks.html#Hooks">(elisp)Hooks</a>.
+</p></dd></dl>
+
+<hr>
+<a name="Selection"></a>
+<div class="header">
+<p>
+Next: <a href="#Configuration" accesskey="n" rel="next">Configuration</a>, Previous: <a href="#Syntax-checking" accesskey="p" rel="previous">Syntax checking</a>, Up: <a href="#Usage" accesskey="u" rel="up">Usage</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Syntax-checker-selection"></a>
+<h3 class="section">2.2 Syntax checker selection</h3>
+
+<p>By default Flycheck automatically selects a suitable syntax checker from
+<code>flycheck-checkers</code>:
+</p>
+<dl>
+<dt><a name="index-flycheck_002dcheckers"></a>User Option: <strong>flycheck-checkers</strong></dt>
+<dd><p>A list of all syntax checkers to use as candidates for automatic checker
+selection.
+</p>
+<p>The first suitable syntax checker from this list is used to check a
+buffer.  A syntax checker is suitable, if
+</p><ul>
+<li> it may be used for the current major mode,
+</li><li> it&rsquo;s predicate matches,
+</li><li> and if the syntax checking tool exists.
+</li></ul>
+
+<p>A syntax checker contained in this list is said to be <em>registered</em>.
+</p>
+<p>See <a href="Syntax-checkers.html#Syntax-checkers">Syntax checkers</a>, for a list of available checkers.
+</p></dd></dl>
+
+<p>If no suitable syntax checker is found the syntax check is
+<em>silently</em> omitted.  <em>No</em> error is signaled, and only a
+specific indicator informs about the omitted syntax check.  See <a href="#Mode-line">Mode line</a>.
+</p>
+<p>You can manually select a specific syntax checker for the current
+buffer, too:
+</p>
+<dl compact="compact">
+<dt><kbd>C-c ! s</kbd></dt>
+<dt><kbd>M-x flycheck-select-checker</kbd></dt>
+<dd><a name="index-flycheck_002dselect_002dchecker"></a>
+<p>Prompt for a checker.  If no syntax checker is entered deselect the
+current syntax checker, and re-enable automatic selection again.  With
+prefix arg, re-enable automatic selection without prompting.
+</p>
+<p>Syntax checker do <em>not</em> need to be registered to be manually
+selected with this command.
+</p></dd>
+</dl>
+
+<p><code>flycheck-select-checker</code> sets <code>flycheck-checker</code>:
+</p>
+<dl>
+<dt><a name="index-flycheck_002dchecker"></a>Variable: <strong>flycheck-checker</strong></dt>
+<dd><p>Syntax checker to use for the current buffer.
+</p>
+<p>The variable is buffer local, and safe as file local variable for
+registered checkers.
+</p>
+<p>If unset, automatically select a suitable syntax checker.
+</p>
+<p>If set, only use this syntax checker.  Automatic selection is
+<em>disabled</em>.  If the syntax checker is unusable, signal an error.
+</p></dd></dl>
+
+<p>You may directly set this variable, e.g. via file local variables.  For
+instance, you can use the following file local variable within a Python
+source file to always check this file with <code>pylint</code>:
+</p>
+<div class="example">
+<pre class="example"># Local Variables:
+# flycheck-checker: python-pylint
+# End:
+</pre></div>
+
+<p>See <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Specifying-File-Variables.html#Specifying-File-Variables">(emacs)Specifying File Variables</a>, for more information about
+file variables.
+</p>
+<p>Each syntax checker provides documentation with information about the
+executable the syntax checker uses, in which buffers it will be used for
+syntax checks, and whether it can be configured.  See <a href="#Configuration">Configuration</a>,
+for more information about syntax checker configuration.
+</p>
+<dl compact="compact">
+<dt><kbd>C-c ! ?</kbd></dt>
+<dt><kbd>M-x flycheck-describe-checker</kbd></dt>
+<dd><a name="index-flycheck_002ddescribe_002dchecker"></a>
+<p>Show the documentation of a syntax checker.
+</p></dd>
+</dl>
+
+<hr>
+<a name="Configuration"></a>
+<div class="header">
+<p>
+Next: <a href="#Reporting" accesskey="n" rel="next">Reporting</a>, Previous: <a href="#Selection" accesskey="p" rel="previous">Selection</a>, Up: <a href="#Usage" accesskey="u" rel="up">Usage</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Syntax-checker-configuration"></a>
+<h3 class="section">2.3 Syntax checker configuration</h3>
+
+<p>Some syntax checkers can be configured via options.  The following
+options are provided by Flycheck (use <kbd>C-h v</kbd> or <kbd>M-x
+describe-variable</kbd> on the variable name for detailed help):
+</p>
+<dl>
+<dt><a name="index-flycheck_002dflake8_002dmaximum_002dcomplexity"></a>User Option: <strong>flycheck-flake8-maximum-complexity</strong></dt>
+<dd><p>The maximum McCabe complexity the <code>python-flake8</code> syntax checker
+allows without reporting a warning.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-flycheck_002dflake8_002dmaximum_002dline_002dlength"></a>User Option: <strong>flycheck-flake8-maximum-line-length</strong></dt>
+<dd><p>The maximum length of a line in characters the <code>python-flake8</code>
+syntax checker allows without reporting an error.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-flycheck_002dphpcs_002dstandard"></a>User Option: <strong>flycheck-phpcs-standard</strong></dt>
+<dd><p>The coding standard the syntax checker <code>php-phpcs</code> shall use.
+</p></dd></dl>
+
+<p>Some syntax checkers also read configuration files denoted by associated
+<em>configuration file variables</em>.  The following configuration files
+are provided by Flycheck:
+</p>
+<dl>
+<dt><a name="index-flycheck_002dchktexrc"></a>User Option: <strong>flycheck-chktexrc</strong></dt>
+<dd><p>The configuration file for the <code>tex-chktex</code> syntax checker.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-flycheck_002dcoffeelintrc"></a>User Option: <strong>flycheck-coffeelintrc</strong></dt>
+<dd><p>The configuration file for the <code>coffee-coffeelint</code> syntax checker.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-flycheck_002dflake8rc"></a>User Option: <strong>flycheck-flake8rc</strong></dt>
+<dd><p>The configuration file for the <code>python-flake8</code> syntax checker.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-flycheck_002djshintrc"></a>User Option: <strong>flycheck-jshintrc</strong></dt>
+<dd><p>The configuration file for the <code>javascript-jshint</code> syntax checker.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-flycheck_002dtidyrc"></a>User Option: <strong>flycheck-tidyrc</strong></dt>
+<dd><p>The configuration file for the <code>html-tidy</code> syntax checker.
+</p></dd></dl>
+
+<p>All configuration file variables are interpreted according to the
+following rules:
+</p>
+<p>If the variable contains a plain file name <em>without</em> any slash,
+e.g. <samp>.jshintrc</samp>, this file is searched
+</p>
+<ol>
+<li> in the buffer&rsquo;s directory,
+</li><li> any ancestors thereof,
+</li><li> and in the <code>HOME</code> directory eventually.
+</li></ol>
+
+<p>If the buffer has no <code>buffer-file-name</code>, only the <code>HOME</code>
+directory is searched.
+</p>
+<p>If the variable contains a <em>path with</em> a slash,
+e.g. <samp>./.jshintrc</samp> or <samp>~/.jshintrc</samp>, the path is expanded
+against the buffer&rsquo;s directory using <code>expand-file-name</code>.
+</p>
+<p>Customize these variables using <kbd>M-x customize-group RET
+flycheck-config-files</kbd>.  Use <code>flycheck-describe-checker</code> to find
+out whether a syntax checker has a configuration file.
+</p>
+<p>You may also use these variables as file-local variables.  For instance,
+the following checks the Javascript file always with <samp>.jshintrc</samp>
+from the parent directory:
+</p>
+<div class="example">
+<pre class="example">// Local variables:
+// flycheck-jshintrc: &quot;../.jshintrc&quot;
+// End:
+</pre></div>
+
+<p>Some syntax checkers have options that cannot be changed in
+configuration files.  These options can be changed by various variables.
+Customize these with <kbd>M-x customize-group RET flycheck-options</kbd>.
+</p>
+<hr>
+<a name="Reporting"></a>
+<div class="header">
+<p>
+Next: <a href="#Navigation" accesskey="n" rel="next">Navigation</a>, Previous: <a href="#Configuration" accesskey="p" rel="previous">Configuration</a>, Up: <a href="#Usage" accesskey="u" rel="up">Usage</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Error-reporting"></a>
+<h3 class="section">2.4 Error reporting</h3>
+
+<p>Errors and warnings from a syntax checker are
+</p><ul>
+<li> reported in the mode line or in a popup buffer, depending on the length
+of the error messages,
+</li><li> indicated by fringe icons,
+</li><li> and highlighted in the buffer with <code>flycheck-error-face</code> and
+<code>flycheck-warning-face</code> respectively, according to
+<code>flycheck-highlighting-mode</code>
+</li></ul>
+
+<dl>
+<dt><a name="index-flycheck_002derror_002dface"></a>User Option: <strong>flycheck-error-face</strong></dt>
+<dt><a name="index-flycheck_002dwarning_002dface"></a>User Option: <strong>flycheck-warning-face</strong></dt>
+<dd><p>The faces to use to highlight errors and warnings respectively.
+</p>
+<p>Note that the default faces provided by GNU Emacs are ill-suited to
+highlight errors because these are relatively pale and do not specify a
+background color or underline.  Hence highlights are easily overlook and
+even <b>invisible</b> for white space.
+</p>
+<p>For best error highlighting customize these faces, or choose a color
+theme that has reasonable Flycheck faces, for instance the excellent
+<a href="https://github.com/bbatsov/solarized-emacs">Solarized theme</a>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-flycheck_002dhighlighting_002dmode"></a>User Option: <strong>flycheck-highlighting-mode</strong></dt>
+<dd><p>This variable determines how to highlight errors:
+</p>
+<p>If set to <code>columns</code> try to highlight errors as exactly as possible.
+If an error provides information about a specific column, only this
+column is highlighted.  This retains as much information as possible
+from the syntax checker, but a single column highlight may be easily
+overlooked.  This mode is the default.
+</p>
+<p>If set to <code>lines</code> the whole line on which the error occurred is
+highlighted, regardless of whether the error is actually specific to a
+column.  Column information is hence ignored.
+</p>
+<p>If set to <code>nil</code> highlighting is completely disabled.  Errors will
+only be reported via fringe icons and error message popups.
+</p>
+<p>Note that this variable does <em>not</em> affect error <em>navigation</em>.
+<code>next-error</code> and <code>previous-error</code> always jump to the error
+column, regardless of the highlighting mode.
+</p></dd></dl>
+
+<p>To view an error message, either hover the mouse of the highlighted
+error, or move the point to the highlighted error and wait for a short
+moment to see the error message in the echo area.
+</p>
+<dl compact="compact">
+<dt><kbd>C-c ! C</kbd></dt>
+<dt><kbd>M-x flycheck-clear</kbd></dt>
+<dd><a name="index-flycheck_002dclear"></a>
+<p>Clear all Flycheck errors and warnings in the current buffer.
+</p></dd>
+</dl>
+
+<hr>
+<a name="Navigation"></a>
+<div class="header">
+<p>
+Next: <a href="#Mode-line" accesskey="n" rel="next">Mode line</a>, Previous: <a href="#Reporting" accesskey="p" rel="previous">Reporting</a>, Up: <a href="#Usage" accesskey="u" rel="up">Usage</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Error-navigation"></a>
+<h3 class="section">2.5 Error navigation</h3>
+
+<p>Flycheck supports the standard error navigation commands of Emacs.  If
+<b>no</b> compilation buffer (including those from <kbd>M-x compile</kbd>,
+<kbd>M-x grep</kbd>, <kbd>M-x occur</kbd>, etc.) is visible, <kbd>M-g n</kbd>
+(<code>next-error</code>) and <kbd>M-g p</kbd> (<code>previous-error</code>) will
+navigate between Flycheck warnings and errors in the current buffer.
+See <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Compilation-Mode.html#Compilation-Mode">(emacs)Compilation Mode</a>, for more information about these
+commands.
+</p>
+<p>Visible compilation buffers take precedence over Flycheck navigation.
+If such a buffer is visible, <kbd>M-g n</kbd> and <kbd>M-g p</kbd> will ignore
+Flycheck errors and warnings, and navigate errors (or generally results)
+reported by the compilation buffer instead.
+</p>
+<p>To address this issue, Flycheck provides independent error navigation
+commands:
+</p>
+<dl compact="compact">
+<dt><kbd>C-c ! n</kbd></dt>
+<dt><kbd>M-x flycheck-next-error</kbd></dt>
+<dd><a name="index-flycheck_002dnext_002derror"></a>
+<p>Jump to the next Flycheck error.
+</p>
+<p>With prefix argument, jump forwards by as many errors as specified by
+the prefix argument, e.g. <kbd>M-3 C-c ! n</kbd> will move to the 3rd error
+from the current point.
+</p>
+</dd>
+<dt><kbd>C-c ! p</kbd></dt>
+<dt><kbd>M-x flycheck-previous-error</kbd></dt>
+<dd><a name="index-flycheck_002dprevious_002derror"></a>
+<p>Jump to the previous Flycheck error.
+</p>
+<p>With prefix argument, jump backwards by as many errors as specified by
+the prefix argument, e.g. <kbd>M-3 C-c ! p</kbd> will move to the 3rd
+previous error from the current point.
+</p>
+</dd>
+<dt><kbd>M-x flycheck-first-error</kbd></dt>
+<dd><p>Jump to the first Flycheck error.
+</p>
+<p>With prefix argument, jump forwards to by as many errors as specified by
+the prefix argument, e.g. <kbd>M-3 M-x flycheck-first-error</kbd> moves to
+the 3rd error from the beginning of the buffer.
+</p>
+</dd>
+</dl>
+
+<p>Error navigation jumps to the exact error column, or to the first
+non-whitespace character of a line if the error is not specific to a
+column.
+</p>
+<hr>
+<a name="Mode-line"></a>
+<div class="header">
+<p>
+Previous: <a href="#Navigation" accesskey="p" rel="previous">Navigation</a>, Up: <a href="#Usage" accesskey="u" rel="up">Usage</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Mode-line-1"></a>
+<h3 class="section">2.6 Mode line</h3>
+
+<p>Flycheck indicates its state in the mode line:
+</p>
+<dl compact="compact">
+<dt>&lsquo;<samp>FlyC</samp>&rsquo;</dt>
+<dd><p>There are no errors in the current buffer.
+</p></dd>
+<dt>&lsquo;<samp>FlyC*</samp>&rsquo;</dt>
+<dd><p>A syntax check is being performed currently.
+</p></dd>
+<dt>&lsquo;<samp>FlyC:3/4</samp>&rsquo;</dt>
+<dd><p>There are three errors and four warnings in the current buffer.
+</p></dd>
+<dt>&lsquo;<samp>FlyC-</samp>&rsquo;</dt>
+<dd><p>Automatic syntax checker selection did not find a suitable syntax
+checker.  See <a href="#Selection">Selection</a>, for more information.
+</p></dd>
+<dt>&lsquo;<samp>FlyC!</samp>&rsquo;</dt>
+<dd><p>The syntax check failed.  Inspect the <code>*Messages*</code> buffer for
+details.
+</p></dd>
+<dt>&lsquo;<samp>FlyC?</samp>&rsquo;</dt>
+<dd><p>The syntax check had a dubious result.  The definition of the syntax
+checker may be flawed.  Inspect the <code>*Messages*</code> buffer for
+details.  This indicator should never be displayed for built-in syntax
+checkers.  If it is, please report this issue to the Flycheck
+developers.  See <a href="Contribution.html#Reporting-issues">Reporting issues</a>.
+</p></dd>
+</dl>
+
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="#Navigation" accesskey="p" rel="previous">Navigation</a>, Up: <a href="#Usage" accesskey="u" rel="up">Usage</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

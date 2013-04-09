@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- This manual is for Flycheck.
+
+Copyright (C) 2013 Sebastian Wiesner
+
+Permission is granted to copy, distribute and/or modify this document
+  under the terms of the GNU Free Documentation License, Version 1.3 or
+  any later version published by the Free Software Foundation; with no
+  Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+  copy of the license is included in the section entitled "GNU Free
+  Documentation License". -->
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>The Flycheck manual: Top</title>
+
+<meta name="description" content="The Flycheck manual: Top">
+<meta name="keywords" content="The Flycheck manual: Top">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="#Top" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="../dir/index.html" rel="up" title="(dir)">
+<link href="Introduction.html#Introduction" rel="next" title="Introduction">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="flycheck.css">
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<h1 class="settitle" align="center">The Flycheck manual</h1>
+
+
+
+
+
+
+
+
+<a name="SEC_Contents"></a>
+<h2 class="contents-heading">Table of Contents</h2>
+
+<div class="contents">
+
+<ul class="no-bullet">
+  <li><a name="toc-Introduction-1" href="Introduction.html#Introduction">1 Introduction</a>
+  <ul class="no-bullet">
+    <li><a name="toc-Features-1" href="Introduction.html#Features">1.1 Features</a></li>
+    <li><a name="toc-Installation-1" href="Introduction.html#Installation">1.2 Installation</a></li>
+    <li><a name="toc-Activation-1" href="Introduction.html#Activation">1.3 Activation</a></li>
+  </ul></li>
+  <li><a name="toc-Usage-1" href="Usage.html#Usage">2 Usage</a>
+  <ul class="no-bullet">
+    <li><a name="toc-Syntax-checking-1" href="Usage.html#Syntax-checking">2.1 Syntax checking</a></li>
+    <li><a name="toc-Syntax-checker-selection" href="Usage.html#Selection">2.2 Syntax checker selection</a></li>
+    <li><a name="toc-Syntax-checker-configuration" href="Usage.html#Configuration">2.3 Syntax checker configuration</a></li>
+    <li><a name="toc-Error-reporting" href="Usage.html#Reporting">2.4 Error reporting</a></li>
+    <li><a name="toc-Error-navigation" href="Usage.html#Navigation">2.5 Error navigation</a></li>
+    <li><a name="toc-Mode-line-1" href="Usage.html#Mode-line">2.6 Mode line</a></li>
+  </ul></li>
+  <li><a name="toc-Extending-1" href="Extending.html#Extending">3 Extending</a>
+  <ul class="no-bullet">
+    <li><a name="toc-Declaration-of-syntax-checkers" href="Extending.html#Declaration">3.1 Declaration of syntax checkers</a></li>
+    <li><a name="toc-Error-parsers-1" href="Extending.html#Error-parsers">3.2 Error parsers</a></li>
+    <li><a name="toc-Option-filters-1" href="Extending.html#Option-filters">3.3 Option filters</a></li>
+    <li><a name="toc-Examples-of-syntax-checkers" href="Extending.html#Examples">3.4 Examples of syntax checkers</a>
+    <ul class="no-bullet">
+      <li><a name="toc-Basic-syntax-checkers" href="Extending.html#Simple-example">3.4.1 Basic syntax checkers</a></li>
+      <li><a name="toc-Syntax-checkers-with-predicates" href="Extending.html#Predicate-example">3.4.2 Syntax checkers with predicates</a></li>
+      <li><a name="toc-Configuration-files-for-syntax-checkers" href="Extending.html#Configuration-example">3.4.3 Configuration files for syntax checkers</a></li>
+      <li><a name="toc-Chaining-syntax-checkers" href="Extending.html#Chaining-example">3.4.4 Chaining syntax checkers</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a name="toc-Flycheck-API" href="API.html#API">4 Flycheck API</a>
+  <ul class="no-bullet">
+    <li><a name="toc-Error-API-1" href="API.html#Error-API">4.1 Error API</a></li>
+    <li><a name="toc-Error-parser-API-1" href="API.html#Error-parser-API">4.2 Error parser API</a></li>
+  </ul></li>
+  <li><a name="toc-Contribution-1" href="Contribution.html#Contribution">5 Contribution</a>
+  <ul class="no-bullet">
+    <li><a name="toc-Reporting-issues-1" href="Contribution.html#Reporting-issues">5.1 Reporting issues</a></li>
+    <li><a name="toc-Contributing-syntax-checkers-1" href="Contribution.html#Contributing-syntax-checkers">5.2 Contributing syntax checkers</a></li>
+    <li><a name="toc-Contributing-code-1" href="Contribution.html#Contributing-code">5.3 Contributing code</a></li>
+    <li><a name="toc-Writing-unit-tests" href="Contribution.html#Unit-tests">5.4 Writing unit tests</a></li>
+  </ul></li>
+  <li><a name="toc-Changes-1" href="Changes.html#Changes">Appendix A Changes</a>
+  <ul class="no-bullet">
+    <li><a name="toc-0_002e1-_0028Oct-11_002c-2012_0029" href="Changes.html#g_t0_002e1">0.1 (Oct 11, 2012)</a></li>
+    <li><a name="toc-0_002e2-_0028Oct-15_002c-2012_0029" href="Changes.html#g_t0_002e2">0.2 (Oct 15, 2012)</a></li>
+    <li><a name="toc-0_002e3-_0028Oct-20_002c-2012_0029" href="Changes.html#g_t0_002e3">0.3 (Oct 20, 2012)</a></li>
+    <li><a name="toc-0_002e4-_0028Nov-21_002c-2012_0029" href="Changes.html#g_t0_002e4">0.4 (Nov 21, 2012)</a></li>
+    <li><a name="toc-0_002e5-_0028Dec-28_002c-2012_0029" href="Changes.html#g_t0_002e5">0.5 (Dec 28, 2012)</a></li>
+    <li><a name="toc-0_002e6-_0028Jan-29_002c-2013_0029" href="Changes.html#g_t0_002e6">0.6 (Jan 29, 2013)</a></li>
+    <li><a name="toc-0_002e6_002e1-_0028Jan-30_002c-2013_0029" href="Changes.html#g_t0_002e6_002e1">0.6.1 (Jan 30, 2013)</a></li>
+    <li><a name="toc-0_002e7-_0028Feb-14_002c-2013_0029" href="Changes.html#g_t0_002e7">0.7 (Feb 14, 2013)</a></li>
+    <li><a name="toc-0_002e7_002e1-_0028Feb-23_002c-2013_0029" href="Changes.html#g_t0_002e7_002e1">0.7.1 (Feb 23, 2013)</a></li>
+    <li><a name="toc-master-_0028Apr-9_002c-2013_0029" href="Changes.html#g_t0_002e8">master (Apr 9, 2013)</a></li>
+    <li><a name="toc-master-_0028unreleased_0029" href="Changes.html#master">master (unreleased)</a></li>
+  </ul></li>
+  <li><a name="toc-Credits-1" href="Credits.html#Credits">Appendix B Credits</a></li>
+  <li><a name="toc-GNU-Free-Documentation-License-1" href="GNU-Free-Documentation-License.html#GNU-Free-Documentation-License">Appendix C GNU Free Documentation License</a></li>
+  <li><a name="toc-Available-syntax-checkers" href="Syntax-checkers.html#Syntax-checkers">Appendix D Available syntax checkers</a></li>
+  <li><a name="toc-Function-and-Variable-Index-1" href="Function-and-Variable-Index.html#Function-and-Variable-Index">Function and Variable Index</a></li>
+</ul>
+</div>
+
+
+<a name="Top"></a>
+<div class="header">
+<p>
+Next: <a href="Introduction.html#Introduction" accesskey="n" rel="next">Introduction</a>, Previous: <a href="../dir/index.html" accesskey="p" rel="previous">(dir)</a>, Up: <a href="../dir/index.html" accesskey="u" rel="up">(dir)</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Flycheck-manual"></a>
+<h1 class="top">Flycheck manual</h1>
+
+<p>This manual is for Flycheck.
+</p>
+<p>Copyright &copy; 2013 Sebastian Wiesner
+</p>
+<blockquote>
+<p>Permission is granted to copy, distribute and/or modify this document
+  under the terms of the GNU Free Documentation License, Version 1.3 or
+  any later version published by the Free Software Foundation; with no
+  Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+  copy of the license is included in the section entitled &ldquo;GNU Free
+  Documentation License&rdquo;.
+</p></blockquote>
+
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Introduction.html#Introduction" accesskey="1">Introduction</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Introduce Flycheck, aka &ldquo;flymake done right&rdquo;
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Usage.html#Usage" accesskey="2">Usage</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to use Flycheck for on-the-fly syntax checking
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Extending.html#Extending" accesskey="3">Extending</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to extend Flycheck with new syntax checkers
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="API.html#API" accesskey="4">API</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">An overview about the Flycheck API
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Contribution.html#Contribution" accesskey="5">Contribution</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to contribute to Flycheck development
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Changes.html#Changes" accesskey="6">Changes</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Changes to Flycheck
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Credits.html#Credits" accesskey="7">Credits</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Developers and contributors to Flycheck
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="GNU-Free-Documentation-License.html#GNU-Free-Documentation-License" accesskey="8">GNU Free Documentation License</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">The license of this documentation
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Syntax-checkers.html#Syntax-checkers" accesskey="9">Syntax checkers</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Available syntax checkers
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Function-and-Variable-Index.html#Function-and-Variable-Index">Function and Variable Index</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">A menu containing functions and variables
+</td></tr>
+</table>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Introduction.html#Introduction" accesskey="n" rel="next">Introduction</a>, Previous: <a href="../dir/index.html" accesskey="p" rel="previous">(dir)</a>, Up: <a href="../dir/index.html" accesskey="u" rel="up">(dir)</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

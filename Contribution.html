@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- This manual is for Flycheck.
+
+Copyright (C) 2013 Sebastian Wiesner
+
+Permission is granted to copy, distribute and/or modify this document
+  under the terms of the GNU Free Documentation License, Version 1.3 or
+  any later version published by the Free Software Foundation; with no
+  Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+  copy of the license is included in the section entitled "GNU Free
+  Documentation License". -->
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>The Flycheck manual: Contribution</title>
+
+<meta name="description" content="The Flycheck manual: Contribution">
+<meta name="keywords" content="The Flycheck manual: Contribution">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="index.html#Top" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html#Top" rel="up" title="Top">
+<link href="Changes.html#Changes" rel="next" title="Changes">
+<link href="API.html#Error-parser-API" rel="previous" title="Error parser API">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="flycheck.css">
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Contribution"></a>
+<div class="header">
+<p>
+Next: <a href="Changes.html#Changes" accesskey="n" rel="next">Changes</a>, Previous: <a href="API.html#API" accesskey="p" rel="previous">API</a>, Up: <a href="index.html#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Contribution-1"></a>
+<h2 class="chapter">5 Contribution</h2>
+
+<p>Flycheck needs your help, in all aspects.  Please
+</p>
+<ul>
+<li> report all bugs and issues you can find,
+</li><li> tell us your ideas for improvements or new features,
+</li><li> and send us your patches and pull requests!
+</li></ul>
+
+<p>This chapter helps you in doing so, by giving you guidelines for
+contribution.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="#Reporting-issues" accesskey="1">Reporting issues</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to report issues with Flycheck
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Contributing-syntax-checkers" accesskey="2">Contributing syntax checkers</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to contribute your syntax checkers
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Contributing-code" accesskey="3">Contributing code</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to contribute code
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Unit-tests" accesskey="4">Unit tests</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to write unit tests for your code
+</td></tr>
+</table>
+
+<hr>
+<a name="Reporting-issues"></a>
+<div class="header">
+<p>
+Next: <a href="#Contributing-syntax-checkers" accesskey="n" rel="next">Contributing syntax checkers</a>, Up: <a href="#Contribution" accesskey="u" rel="up">Contribution</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Reporting-issues-1"></a>
+<h3 class="section">5.1 Reporting issues</h3>
+
+<p>Please report any issues to the
+<a href="https://github.com/lunaryorn/flycheck/issues">Flycheck issue
+tracker</a>.
+</p>
+<p>When doing so, please respect the following guidelines:
+</p>
+<ul>
+<li> Check that the issue has not already been reported.
+</li><li> Check that the issue has not already been fixed in the latest code.
+</li><li> Be clear and precise.  If possible, name functions and command exactly.
+</li><li> Open an issue with a clear title and description in grammatically
+correct, complete sentences.
+</li></ul>
+
+<p>We will try to handle each issue appropriately, and adhering to these
+guidelines helps us in doing so.
+</p>
+
+<hr>
+<a name="Contributing-syntax-checkers"></a>
+<div class="header">
+<p>
+Next: <a href="#Contributing-code" accesskey="n" rel="next">Contributing code</a>, Previous: <a href="#Reporting-issues" accesskey="p" rel="previous">Reporting issues</a>, Up: <a href="#Contribution" accesskey="u" rel="up">Contribution</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Contributing-syntax-checkers-1"></a>
+<h3 class="section">5.2 Contributing syntax checkers</h3>
+
+<p>When creating a new syntax checker, either create an issue (see
+<a href="#Reporting-issues">Reporting issues</a>) and paste your syntax checker declaration, or
+fork the repository, implement the syntax checker in Flycheck itself and
+send us a pull request (see <a href="#Contributing-code">Contributing code</a>).
+</p>
+<p>Whatever way you choose, please respect the following guidelines:
+</p>
+<ul>
+<li> Provide a link to the website of the syntax checker tool.
+</li><li> Show some example source code that triggered warnings or errors with the
+syntax checker tool.
+</li><li> If possible, please add unit tests for your new syntax
+checker. See <a href="#Unit-tests">Unit tests</a>.
+</li></ul>
+
+<hr>
+<a name="Contributing-code"></a>
+<div class="header">
+<p>
+Next: <a href="#Unit-tests" accesskey="n" rel="next">Unit tests</a>, Previous: <a href="#Contributing-syntax-checkers" accesskey="p" rel="previous">Contributing syntax checkers</a>, Up: <a href="#Contribution" accesskey="u" rel="up">Contribution</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Contributing-code-1"></a>
+<h3 class="section">5.3 Contributing code</h3>
+
+<p>Please contribute patches to Flycheck as pull requests on Github.
+</p>
+<p>When doing so, please respect the following guidelines:
+</p>
+<ul>
+<li> Read how to
+<a href="http://gun.io/blog/how-to-github-fork-branch-and-pull-request">properly contribute to open source projects on Github</a>.
+</li><li> Use a topic branch to easily amend a pull request later, if necessary.
+</li><li> Write
+<a href="http://gun.io/blog/how-to-github-fork-branch-and-pull-request">good commit messages</a>.
+</li><li> Use the same coding style and spacing.
+</li><li> Verify your Emacs Lisp code with <code>checkdoc</code> (<kbd>C-c ? d</kbd>).
+</li><li> Add unit tests for your code, if possible.  See <a href="#Unit-tests">Unit tests</a>.
+</li><li> Open a <a href="https://help.github.com/articles/using-pull-requests">pull
+request</a> that relates to but one subject with a clear title and
+description in grammatically correct, complete sentences.  Be sure to
+give use cases and rationale for your new feature.
+</li></ul>
+
+<p>We will try to respect and include each contribution, however we will
+not do the following:
+</p>
+<ul>
+<li> Include a feature without good use cases and rationale.
+</li><li> Merge poorly written or incomplete code.
+</li></ul>
+
+<p>You will be asked to improve your pull request in these cases.
+</p>
+<hr>
+<a name="Unit-tests"></a>
+<div class="header">
+<p>
+Previous: <a href="#Contributing-code" accesskey="p" rel="previous">Contributing code</a>, Up: <a href="#Contribution" accesskey="u" rel="up">Contribution</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Writing-unit-tests"></a>
+<h3 class="section">5.4 Writing unit tests</h3>
+
+<p>Flycheck has a comprehensive to maintain and ensure the functionality
+and quality of the code.  Please add unit tests for your code if
+possible.
+</p>
+<p>The test suite is contained in the <samp>tests/</samp> directory and written
+using the <a href="../ert/index.html#Top">(ert)ERT</a> library.
+</p>
+<p>To add unit tests do the following:
+</p>
+<ul>
+<li> Familiarize yourself with the <a href="../ert/index.html#Top">(ert)ERT</a> library.
+</li><li> Familiarize yourself with the test suite in <samp>flycheck-testsuite.el</samp>.
+</li><li> Add your tests to the appropriate file.  Create a new test file if
+necessary.
+</li><li> Extend the provisioning script <samp>vagrant/provision.sh</samp> with the
+dependencies of your tests, if necessary.  This includes syntax checker
+tools.
+</li><li> Install <a href="https://www.virtualbox.org/">Virtual Box</a> and
+<a href="http://www.vagrantup.com/">Vagrant</a>.
+</li><li> Run your tests with <code>make virtual-test</code>.
+</li></ul>
+
+<p>You may also run the tests locally during development.  To do so:
+</p><ul>
+<li> Install <a href="https://github.com/rejeep/carton">Carton</a>.
+</li><li> Setup your development environment with <code>carton install</code>.
+</li><li> Run the tests with <code>tests/run.sh</code>.  Use <code>tests/run.sh
+flake8</code> to run only tests whose names contain the string <code>flake8</code>.
+</li></ul>
+
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="#Contributing-code" accesskey="p" rel="previous">Contributing code</a>, Up: <a href="#Contribution" accesskey="u" rel="up">Contribution</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>
