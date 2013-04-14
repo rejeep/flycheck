@@ -165,7 +165,7 @@ single argument to the syntax checker.  Otherwise, <var>option</var> and the
 configuration file path are given as two separate arguments.
 </p>
 </dd>
-<dt><code>(option <var>option</var> <var>variable</var> [<var>filter</var>])</code></dt>
+<dt><code>(option <var>option</var> <var>variable</var> [<var>filters</var>])</code></dt>
 <dd><p>This cell is substituted with the value of <var>variable</var>.  <var>option</var>
 is a string containing the option for with to specify the value.
 <var>filter</var> is an optional function to be applied to the value of
@@ -180,9 +180,7 @@ configuration.  Define this variable with
 <p>If <var>variable</var> is not <var>nil</var> after applying <var>filter</var>, the cell
 is substituted with the <var>option</var> and the value of <var>variable</var>
 after applying <var>filter</var>.  Otherwise the cell is simply dropped from
-the arguments of the syntax checker.  If <var>variable</var> is <code>nil</code>
-directly, <var>filter</var> is <b>not</b> applied, and the cell is immediately
-dropped.
+the arguments of the syntax checker.
 </p>
 <p>An <var>option</var> ending with a <code>=</code> character is treated like in a
 <code>config-file</code> cell.
