@@ -144,6 +144,14 @@ syntax checker!
 an application of this symbol.
 </p>
 </dd>
+<dt><code>temporary-directory</code></dt>
+<dd><p>This symbol is substituted with the path of an existing temporary
+directory, which is unique on each execution of the syntax checker.
+</p>
+<p>Use this symbol if you need to move files created by a syntax checker
+out of the way.
+</p>
+</dd>
 <dt><code>(config-file <var>option</var> <var>variable</var>)</code></dt>
 <dd><p>This cell is substituted with a configuration file for the syntax
 checker.  <var>option</var> is a string containing the option that specifies
