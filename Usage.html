@@ -389,13 +389,25 @@ column, regardless of the highlighting mode.
 <p>To view an error message, either hover the mouse of the highlighted
 error, or move the point to the highlighted error and wait for a short
 moment to see the error message in the echo area.  You can also copy the
-error message into kill ring:
+error message into kill ring, or google it straight from Emacs:
 </p>
 <dl compact="compact">
 <dt><kbd>C-c ! C-w</kbd></dt>
 <dt><kbd>M-x flycheck-copy-messages-as-kill</kbd></dt>
 <dd><a name="index-flycheck_002dcopy_002dmessages_002das_002dkill"></a>
 <p>Copy all Flycheck error messages at the current point into kill ring.
+</p>
+</dd>
+<dt><kbd>C-c ! /</kbd></dt>
+<dt><kbd>M-x flycheck-google-messages</kbd></dt>
+<dd><a name="index-flycheck_002dgoogle_002dmessages"></a>
+<p>Google for all Flycheck error messages at the current point.
+</p>
+<p>If there are more than <code>flycheck-google-max-messages</code> errors at
+point, signal an error, to avoid spamming your browser with Google tabs.
+</p>
+<p>Requires the <a href="https://github.com/Bruce-Connor/emacs-google-this">Google This</a> library which is available on
+<a href="http://melpa.milkbox.net/">MELPA</a>.
 </p>
 </dd>
 <dt><kbd>C-c ! C</kbd></dt>
