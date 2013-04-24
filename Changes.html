@@ -537,11 +537,27 @@ Previous: <a href="#g_t0_002e10" accesskey="p" rel="previous">0.10</a>, Up: <a h
 <h3 class="unnumberedsec">master (unreleased)</h3>
 
 <ul>
-<li> Improvements:
+<li> New features:
+
+<ul>
+<li> Customizable error indication with control of the fringe side, via
+<code>flycheck-indication-mode</code>.
+</li></ul>
+
+</li><li> Improvements:
 
 <ul>
 <li> <a href="https://github.com/lunaryorn/flycheck/issues/123">The <code>ruby</code> syntax checker now differentiates warnings
 from errors</a>
+</li><li> Faces are now in a separate customization group
+</li><li> Invisible buffers are never checked automatically anymore
+</li><li> Buffers are rechecked if the become visible
+</li></ul>
+
+</li><li> Bug fixes:
+
+<ul>
+<li> Add missing customization group for syntax checker options
 </li></ul>
 
 </li></ul>

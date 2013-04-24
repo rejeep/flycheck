@@ -343,7 +343,7 @@ Next: <a href="#Navigation" accesskey="n" rel="next">Navigation</a>, Previous: <
 </p><ul>
 <li> reported in the mode line or in a popup buffer, depending on the length
 of the error messages,
-</li><li> indicated by fringe icons,
+</li><li> indicated according to <code>flycheck-indication-mode</code>,
 </li><li> and highlighted in the buffer with <code>flycheck-error-face</code> and
 <code>flycheck-warning-face</code> respectively, according to
 <code>flycheck-highlighting-mode</code>
@@ -379,11 +379,24 @@ highlighted, regardless of whether the error is actually specific to a
 column.  Column information is hence ignored.
 </p>
 <p>If set to <code>nil</code> highlighting is completely disabled.  Errors will
-only be reported via fringe icons and error message popups.
+still be reported in the mode line and in error message popups, and
+indicated according to <code>flycheck-indication-mode</code>.
 </p>
 <p>Note that this variable does <em>not</em> affect error <em>navigation</em>.
 <code>next-error</code> and <code>previous-error</code> always jump to the error
 column, regardless of the highlighting mode.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-flycheck_002dindication_002dmode"></a>User Option: <strong>flycheck-indication-mode</strong></dt>
+<dd><p>This variable determines how to indicate errors:
+</p>
+<p>If set to <code>left-fringe</code> or <code>right-fringe</code>, indicate errors and
+warnings in the left and right fringe respectively.
+</p>
+<p>If set to <code>nil</code>, do not indicate errors.  Errors will still be
+reported in the mode line and in error message popups, and highlighted
+according to <code>flycheck-highlighting-mode</code>.
 </p></dd></dl>
 
 <p>To view an error message, either hover the mouse of the highlighted
