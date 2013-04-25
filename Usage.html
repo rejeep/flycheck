@@ -96,15 +96,44 @@ Next: <a href="#Selection" accesskey="n" rel="next">Selection</a>, Previous: <a 
 <a name="Syntax-checking-1"></a>
 <h3 class="section">2.1 Syntax checking</h3>
 
-<p>In <code>flycheck-mode</code> the buffer is automatically checked on the fly
-when
+<p>By default, <code>flycheck-mode</code> checks syntax automatically when
 </p>
 <ul>
-<li> the file is saved,
+<li> the mode is enabled,
+</li><li> the file is saved,
 </li><li> or if new lines are inserted.
 </li></ul>
 
-<p>You can also check the buffer manually:
+<p>However, you can customize automatic syntax checking with
+<code>flycheck-check-syntax-automatically</code>:
+</p>
+<dl>
+<dt><a name="index-flycheck_002dcheck_002dsyntax_002dautomatically"></a>User Option: <strong>flycheck-check-syntax-automatically</strong></dt>
+<dd><p>When Flycheck should check syntax automatically.
+</p>
+<p>This variable is list of events that may trigger syntax checks.  The
+following events are known:
+</p>
+<p><code>mode-enabled</code> checks syntax if <code>flycheck-mode</code> is enabled.
+</p>
+<p><code>save</code> checks syntax after the buffer was saved.
+</p>
+<p><code>new-line</code> checks syntax after a new line was inserted.
+</p>
+<p>An syntax check is only conducted for events that are contained in this
+list.  For instance, the following setting will cause Flycheck to never
+check syntax if a new line was inserted:
+</p>
+<div class="lisp">
+<pre class="lisp">(setq flycheck-check-syntax-automatically '(mode-enabled save))
+</pre></div>
+
+<p>If the list is empty syntax is never checked automatically.  In this
+case, use <code>flycheck-buffer</code> to check syntax manually.
+</p></dd></dl>
+
+<p>Regardless of automatic syntax checking you can also check the buffer
+manually:
 </p>
 <dl compact="compact">
 <dt><kbd>C-c ! c</kbd></dt>
