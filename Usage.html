@@ -360,6 +360,9 @@ by the following algorithm:
 <li> If the configuration file variable contains a path a directory
 separator, expand the path against the buffer&rsquo;s default directory and
 use the resulting path as configuration file.
+</li><li> If <a href="https://github.com/bbatsov/projectile">Projectile</a> is available
+and the current buffer is part of a project project, search the
+configuration file in the root directory of the project.
 </li><li> If the buffer has a file name, search the buffer&rsquo;s directory and any
 ancestors thereof for the configuration file.
 </li><li> Eventually attempt to locate the configuration file in the user&rsquo;s home
