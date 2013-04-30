@@ -322,25 +322,6 @@ are provided by Flycheck:
 <dd><p>The configuration file for the <code>html-tidy</code> syntax checker.
 </p></dd></dl>
 
-<p>All configuration file variables are interpreted according to the
-following rules:
-</p>
-<p>If the variable contains a plain file name <em>without</em> any slash,
-e.g. <samp>.jshintrc</samp>, this file is searched
-</p>
-<ol>
-<li> in the buffer&rsquo;s directory,
-</li><li> any ancestors thereof,
-</li><li> and in the <code>HOME</code> directory eventually.
-</li></ol>
-
-<p>If the buffer has no <code>buffer-file-name</code>, only the <code>HOME</code>
-directory is searched.
-</p>
-<p>If the variable contains a <em>path with</em> a slash,
-e.g. <samp>./.jshintrc</samp> or <samp>~/.jshintrc</samp>, the path is expanded
-against the buffer&rsquo;s directory using <code>expand-file-name</code>.
-</p>
 <p>Customize these variables using <kbd>M-x customize-group RET
 flycheck-config-files</kbd>.  Use <code>flycheck-describe-checker</code> to find
 out whether a syntax checker has a configuration file.
@@ -355,9 +336,37 @@ from the parent directory:
 // End:
 </pre></div>
 
-<p>Some syntax checkers have options that cannot be changed in
-configuration files.  These options can be changed by various variables.
-Customize these with <kbd>M-x customize-group RET flycheck-options</kbd>.
+<p>These configuration files are located using the functions in
+<code>flycheck-locate-config-file-functions</code>:
+</p>
+<dl>
+<dt><a name="index-flycheck_002dlocate_002dconfig_002dfile_002dfunctions"></a>User Option: <strong>flycheck-locate-config-file-functions</strong></dt>
+<dd><p>Functions to locate syntax checker configuration files.
+</p>
+<p>Each function in this hook must accept two arguments: The value of the
+configuration file variable, and the syntax checker symbol.  It must
+return either a string with an absolute path to the configuration file,
+or nil, if it cannot locate the configuration file.
+</p>
+<p>The functions in this hook are called in order of appearance, until a
+function returns non-nil.  The configuration file returned by that
+function is then given to the syntax checker if it exists.
+</p></dd></dl>
+
+<p>With the default value of this variable, configuration files are located
+by the following algorithm:
+</p>
+<ol>
+<li> If the configuration file variable contains a path a directory
+separator, expand the path against the buffer&rsquo;s default directory and
+use the resulting path as configuration file.
+</li><li> If the buffer has a file name, search the buffer&rsquo;s directory and any
+ancestors thereof for the configuration file.
+</li><li> Eventually attempt to locate the configuration file in the user&rsquo;s home
+directory.
+</li></ol>
+
+<p>If any of these steps succeeds, the subsequent steps are not executed.
 </p>
 <hr>
 <a name="Reporting"></a>
