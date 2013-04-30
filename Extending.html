@@ -191,10 +191,10 @@ the name or path of the configuration file.  See <a href="Usage.html#Configurati
 more information about syntax checker configuration.  Define this
 variable with <code>flycheck-def-config-file-var</code>.
 </p>
-<p>If the configuration file is found according to the rules documented in
-<a href="Usage.html#Configuration">Configuration</a>, the cell is substituted with the <var>option</var> and
-the absolute path to the configuration file as string.  Otherwise the
-cell is simply dropped from the arguments of the syntax checker.
+<p>If the configuration file is found, the cell is substituted with the
+<var>option</var> and the absolute path to the configuration file as string.
+Otherwise the cell is simply dropped from the arguments of the syntax
+checker.
 </p>
 <p>If <var>option</var> ends with a <code>=</code> character, <var>option</var> and the
 absolute path to the configuration file are concatenated and given as a
