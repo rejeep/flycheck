@@ -146,26 +146,56 @@ manually:
 <p>Each syntax check is comprised of the following steps:
 </p>
 <ol>
-<li> Select a suitable syntax checker.  See <a href="#Selection">Selection</a>, for more
+<li> Run hooks in <code>flycheck-before-syntax-check-hook</code>.
+</li><li> Clear error information from previous syntax checks.
+</li><li> Select a suitable syntax checker.  See <a href="#Selection">Selection</a>, for more
 information on how syntax checkers are selected.
 </li><li> Copy the contents of the buffer to be checked to a temporary file.
-</li><li> Execute the syntax checker tool(s).
+</li><li> Execute the syntax checker.
 </li><li> Parse the output of the tool, and report all errors and warnings.
 See <a href="#Reporting">Reporting</a>, for more information.
+</li><li> If the buffer can be checked with another syntax checker, continue from
+step 4, but with the next syntax checker.  This is called &ldquo;chaining&rdquo;
+of syntax checkers.
 </li><li> Run hooks in <code>flycheck-after-syntax-check-hook</code>.
 </li></ol>
 
 <dl>
 <dt><a name="index-flycheck_002dafter_002dsyntax_002dcheck_002dhook"></a>User Option: <strong>flycheck-after-syntax-check-hook</strong></dt>
-<dd><p>This variable is a list of function to execute after a syntax check is
-completed, including all chained syntax checkers.
+<dd><p>Functions to run after each syntax check.
 </p>
-<p>By the time these functions are called, all errors and warnings are
-already reported.  See <a href="#Reporting">Reporting</a>, for more information about error
-reporting.
+<p>This hook is run after a syntax check was finished.
+</p>
+<p>At this point, <b>all</b> chained checkers were run, and all errors were
+parsed, highlighted and reported.  See <a href="#Reporting">Reporting</a>, for more
+information about error reporting.  The variable
+<code>flycheck-current-errors</code> contains all errors from all syntax
+checkers run during the syntax check, so you can use the various error
+analysis functions.
+</p>
+<p>Note that this hook does <b>not</b> run after each individual syntax
+checker in the syntax checker chain, but only after the <b>last
+checker</b>.
 </p>
 <p>This variable is a normal hook. See <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Hooks.html#Hooks">(elisp)Hooks</a>.
 </p></dd></dl>
+
+<dl>
+<dt><a name="index-flycheck_002dbefore_002dsyntax_002dcheck_002dhook"></a>User Option: <strong>flycheck-before-syntax-check-hook</strong></dt>
+<dd><p>Functions to run before each syntax check.
+</p>
+<p>This hook is run right before a syntax check starts.
+</p>
+<p>Error information from the previous syntax check is <b>not</b> cleared
+before this hook runs.
+</p>
+<p>Note that this hook does not <b>run</b> before each individual syntax
+checker in the syntax checker chain, but only before the <b>first
+checker</b>.
+</p>
+<p>This variable is a normal hook. See <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Hooks.html#Hooks">(elisp)Hooks</a>.
+</p></dd></dl>
+
 
 <hr>
 <a name="Selection"></a>
