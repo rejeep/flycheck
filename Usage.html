@@ -196,6 +196,22 @@ checker</b>.
 <p>This variable is a normal hook. See <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Hooks.html#Hooks">(elisp)Hooks</a>.
 </p></dd></dl>
 
+<p>There is also a hook run whenever a syntax check fails:
+</p>
+<dl>
+<dt><a name="index-flycheck_002dsyntax_002dcheck_002dfailed_002dhook"></a>User Option: <strong>flycheck-syntax-check-failed-hook</strong></dt>
+<dd><p>Functions to run if a syntax check failed.
+</p>
+<p>This hook is run whenever an error occurs during Flycheck&rsquo;s
+internal processing.  No information about the error is given to
+this hook.
+</p>
+<p>You should use this hook to conduct additional cleanup actions
+when Flycheck failed.
+</p>
+<p>This variable is a normal hook. See <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Hooks.html#Hooks">(elisp)Hooks</a>.
+</p></dd></dl>
+
 
 <hr>
 <a name="Selection"></a>
