@@ -153,11 +153,25 @@ whole line.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-flycheck_002derror_002dregion"></a>Function: <strong>flycheck-error-region</strong> <em>err &amp;optional ignore-column</em></dt>
+<dt><a name="index-flycheck_002derror_002dline_002dregion"></a>Function: <strong>flycheck-error-line-region</strong> <em>err</em></dt>
+<dd><p>Get the error line region as <code>(<var>beg</var> . <var>end</var>)</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-flycheck_002derror_002dcolumn_002dregion"></a>Function: <strong>flycheck-error-column-region</strong> <em>err</em></dt>
+<dd><p>Get the error column region.
+</p>
+<p>If <var>err</var> has no column, return <code>nil</code>.  Otherwise return the
+region around the error column as cons cell <code>(<var>beg</var>
+. <var>end</var>)</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-flycheck_002derror_002dregion"></a>Function: <strong>flycheck-error-region</strong> <em>err</em></dt>
 <dd><p>Get the buffer region referred to by <var>err</var>.
 </p>
-<p>If <var>ignore-column</var> is non-nil, ignore the column attribute of
-<var>err</var> when determining the region.
+<p>If <var>err</var> has a column, return the column region, otherwise return
+the line region.
 </p>
 <p>Return the region as cons cell <code>(<var>beg</var> . <var>end</var>)</code>.
 </p></dd></dl>
