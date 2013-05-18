@@ -110,6 +110,10 @@ an error parser.  Flycheck automatically keeps track of the buffer
 itself.
 </p>
 </dd>
+<dt><code>checker</code></dt>
+<dd><p>The syntax checker that reported this error.
+</p>
+</dd>
 <dt><code>filename</code></dt>
 <dd><p>A string containing the filename the error refers to.
 </p>
@@ -182,6 +186,11 @@ has no error column, or if there is no expression at this column, return
 </p>
 <p>This is the position that error navigation would jump to when navigating
 to this error.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-flycheck_002derror_002dformat"></a>Function: <strong>flycheck-error-format</strong> <em>error</em></dt>
+<dd><p>Format the <var>error</var> as a human-readable string.
 </p></dd></dl>
 
 <p>The following functions and variables may be used to analyze the errors
