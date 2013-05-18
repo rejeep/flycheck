@@ -79,6 +79,7 @@ checking extension for GNU Emacs 24 withL
 </li><li> a dead simple, declarative API to create new syntax checkers,
 </li><li> major-mode based selection of syntax checkers,
 </li><li> multiple syntax checkers per buffer,
+</li><li> optional error list popup,
 </li><li> a &ldquo;doesn&rsquo;t get in your way&rdquo; guarantee,
 </li><li> and a clean, concise and understandable implementation with decent test
 coverage.
@@ -108,7 +109,10 @@ Next: <a href="#Installation" accesskey="n" rel="next">Installation</a>, Previou
 <h3 class="section">1.1 Features</h3>
 
 <ul>
-<li>Automatic syntax checking after saving or insertion of new lines
+<li>Automatic on-the-fly syntax checking while editing
+</li><li> Fully automatic selection of the syntax checker
+</li><li> Optional manual selection of a syntax checker with
+<code>flycheck-select-checker</code> at <kbd>C-c ! s</kbd>
 </li><li> Built-in syntax checkers for:
 <ul>
 <li> CoffeeScript (using <code>coffeelint</code>)
@@ -142,6 +146,7 @@ script)
 </li><li> Syntax checker configuration with project-specific configuration files
 and options
 </li><li> Error navigation with <code>next-error</code> and <code>previous-error</code>
+</li><li> Error list with <code>flycheck-list-errors</code> at <kbd>C-c ! l</kbd>
 </li><li> Easy declarative API to define new syntax checkers
 </li><li> Error parsers for structured markup formats (e.g. Checkdoc XML)
 </li></ul>
