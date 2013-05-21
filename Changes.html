@@ -630,7 +630,23 @@ Previous: <a href="#g_t0_002e12" accesskey="p" rel="previous">0.12</a>, Up: <a h
 <h3 class="unnumberedsec">master (unreleased)</h3>
 
 <ul>
-<li> Improvements
+<li> <b>Breaking changes</b>:
+
+<ul>
+<li> Obsolete <code>flycheck-warning-face</code> and <code>flycheck-error-face</code> in
+favor <code>flycheck-warning</code> and <code>flycheck-error</code> respectively
+</li></ul>
+
+</li><li> New features:
+
+<ul>
+<li> Make fringe indicator faces customizable independently with
+<code>flycheck-fringe-error</code> and <code>flycheck-fringe-warning</code>
+</li><li> Improve the default faces by using underlines instead of foreground
+colors, if possible
+</li></ul>
+
+</li><li> Improvements
 
 <ul>
 <li> Always highlight errors on top of warnings now
