@@ -21,7 +21,7 @@ Permission is granted to copy, distribute and/or modify this document
 <meta name="Generator" content="makeinfo">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Function-and-Variable-Index.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="Index.html#Index" rel="index" title="Index">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="index.html#Top" rel="up" title="Top">
 <link href="Contribution.html#Contribution" rel="next" title="Contribution">
@@ -63,7 +63,7 @@ ul.no-bullet {list-style: none}
 <a name="API"></a>
 <div class="header">
 <p>
-Next: <a href="Contribution.html#Contribution" accesskey="n" rel="next">Contribution</a>, Previous: <a href="Extending.html#Extending" accesskey="p" rel="previous">Extending</a>, Up: <a href="index.html#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Contribution.html#Contribution" accesskey="n" rel="next">Contribution</a>, Previous: <a href="Extending.html#Extending" accesskey="p" rel="previous">Extending</a>, Up: <a href="index.html#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Index.html#Index" title="Index" rel="index">Index</a>]</p>
 </div>
 <a name="Flycheck-API"></a>
 <h2 class="chapter">4 Flycheck API</h2>
@@ -91,15 +91,19 @@ on a function or variable, consult its docstring via
 <a name="Error-API"></a>
 <div class="header">
 <p>
-Next: <a href="#Error-parser-API" accesskey="n" rel="next">Error parser API</a>, Previous: <a href="#API" accesskey="p" rel="previous">API</a>, Up: <a href="#API" accesskey="u" rel="up">API</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Error-parser-API" accesskey="n" rel="next">Error parser API</a>, Previous: <a href="#API" accesskey="p" rel="previous">API</a>, Up: <a href="#API" accesskey="u" rel="up">API</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Index.html#Index" title="Index" rel="index">Index</a>]</p>
 </div>
 <a name="Error-API-1"></a>
 <h3 class="section">4.1 Error API</h3>
 
-<p>Flycheck errors are represented by the structure <code>flycheck-error</code>.
+<p>Flycheck errors are represented by the CL structure <code>flycheck-error</code>.
 See <a href="http://www.gnu.org/software/emacs/manual/html_node/cl/Structures.html#Structures">(cl)Structures</a>, for information about CL structures.
 </p>
-<p>This structure has the following attributes, each of which may be nil:
+<dl>
+<dt><a name="index-flycheck_002derror"></a>Structure: <strong>flycheck-error</strong> <em>buffer checker filename line column message level</em></dt>
+<dd>
+<p>A Flycheck error with the following attributes, each of which may be
+<code>nil</code>:
 </p>
 <dl compact="compact">
 <dt><code>buffer</code></dt>
@@ -139,14 +143,38 @@ whole line.
 </p></dd>
 </dl>
 
-<p>The structure has only a single constructor:
+<p>There are two constructors you may use to create errors:
 </p>
 <dl>
 <dt><a name="index-flycheck_002derror_002dnew"></a>Function: <strong>flycheck-error-new</strong> <em>attributes</em></dt>
 <dd><p>Create a new Flycheck error with the given <var>attributes</var>.
 </p>
-<p><var>attributes</var> are given as keyword arguments.
+<p><var>attributes</var> are given as keyword arguments, for instance:
+</p>
+<div class="lisp">
+<pre class="lisp">(flycheck-error-new :line 10 :column 5 :message &quot;Foo&quot; :level 'warning)
+</pre></div>
+
+</dd></dl>
+
+<dl>
+<dt><a name="index-flycheck_002derror_002dnew_002dat"></a>Function: <strong>flycheck-error-new-at</strong> <em>line column &amp;optional level message   &amp;key checker filename buffer</em></dt>
+<dd><p>Create a new Flycheck error at the given position.
+</p>
+<p><var>line</var> and <var>column</var> are the line and column of the new error
+respectively.  The optional arguments <var>level</var> and <var>message</var> are
+the level and the message respectively.
+</p>
+<p>The <var>checker</var>, <var>filename</var> and <var>buffer</var> attributes may be
+initialized as keyword arguments only.  Note that these keywords
+arguments may only be used <b>together</b> with the optional arguments,
+that is <var>level</var> and <var>message</var> must be specified explicitly to
+use the keyword arguments.
+</p>
+<p>If omitted, <var>buffer</var> defaults to the current buffer.
 </p></dd></dl>
+
+</dd></dl>
 
 <p>The following functions are provided to work with errors:
 </p>
@@ -222,7 +250,7 @@ the given <var>level</var>.
 <a name="Error-parser-API"></a>
 <div class="header">
 <p>
-Previous: <a href="#Error-API" accesskey="p" rel="previous">Error API</a>, Up: <a href="#API" accesskey="u" rel="up">API</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+Previous: <a href="#Error-API" accesskey="p" rel="previous">Error API</a>, Up: <a href="#API" accesskey="u" rel="up">API</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Index.html#Index" title="Index" rel="index">Index</a>]</p>
 </div>
 <a name="Error-parser-API-1"></a>
 <h3 class="section">4.2 Error parser API</h3>
@@ -236,7 +264,7 @@ Previous: <a href="#Error-API" accesskey="p" rel="previous">Error API</a>, Up: <
 <hr>
 <div class="header">
 <p>
-Previous: <a href="#Error-API" accesskey="p" rel="previous">Error API</a>, Up: <a href="#API" accesskey="u" rel="up">API</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+Previous: <a href="#Error-API" accesskey="p" rel="previous">Error API</a>, Up: <a href="#API" accesskey="u" rel="up">API</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Index.html#Index" title="Index" rel="index">Index</a>]</p>
 </div>
 
 
