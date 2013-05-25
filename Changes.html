@@ -644,6 +644,8 @@ favor <code>flycheck-warning</code> and <code>flycheck-error</code> respectively
 <code>flycheck-fringe-error</code> and <code>flycheck-fringe-warning</code>
 </li><li> Improve the default faces by using underlines instead of foreground
 colors, if possible
+</li><li> <a href="https://github.com/lunaryorn/flycheck/issues/141">Customizable error processing with
+<code>flycheck-process-error-functions</code></a>
 </li></ul>
 
 </li><li> Improvements
@@ -659,6 +661,9 @@ colors, if possible
 <li> Fix error when searching for a configuration file outside a Projectile
 project
 </li><li> Do not start a syntax check before the <code>flycheck-mode-hook</code> was run
+</li><li> Do not start automatic syntax checks if Flycheck Mode is disabled
+</li><li> <a href="https://github.com/lunaryorn/flycheck/issues/143">Defer the initial syntax check until after the current
+interactive command</a>
 </li></ul>
 
 </li></ul>
