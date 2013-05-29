@@ -142,6 +142,18 @@ list.  For instance, the following setting will cause Flycheck to
 case, use <code>flycheck-buffer</code> to check syntax manually.
 </p></dd></dl>
 
+<dl>
+<dt><a name="index-flycheck_002didle_002dchange_002ddelay"></a>User Option: <strong>flycheck-idle-change-delay</strong></dt>
+<dd><p>How many seconds to wait before starting a syntax check.
+</p>
+<p>After the buffer was changed, Flycheck waits as many seconds as the
+value of this variable before starting a syntax check.  If the buffer is
+changed during this time, Flycheck starts to wait again.
+</p>
+<p>This variable has no effekt, if <code>idle-change</code> is not contained in
+<code>flycheck-check-syntax-automatically</code>.
+</p></dd></dl>
+
 <p>Regardless of automatic syntax checking you can also check the buffer
 manually:
 </p>
