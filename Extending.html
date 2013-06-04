@@ -168,7 +168,6 @@ out-dated errors:
 <pre class="lisp">:predicate (and (buffer-file-name) (not (buffer-modified-p)))
 </pre></div>
 
-
 </dd>
 <dt><code>temporary-directory</code></dt>
 <dd><p>This symbol is substituted with the path of an existing temporary
@@ -245,9 +244,13 @@ parsers.
 </p>
 <p>Using a error parser is preferred if a syntax checker provides a
 structured output format like XML or JSON.  If possible, re-use one of
-the built-in error parsers listed in <a href="#Error-parsers">Error parsers</a>
+the built-in error parsers listed in <a href="#Error-parsers">Error parsers</a>.
 </p>
-<p>May not be specified together with <code>:error-patterns</code>.
+<p>An error parser takes precedence over <code>:error-patterns</code>.  To use an
+error parser together with patterns, you must manually call
+<code>flycheck-parse-output-with-patterns</code> in your error parser to parse
+with error patterns first.  You can the post-process the errors returned
+by this function.
 </p>
 </dd>
 <dt><code>:error-patterns '((<var>regexp</var> <var>level</var>)...)</code></dt>
@@ -284,8 +287,6 @@ sure that the group numbering is correct.  See <a href="http://www.gnu.org/softw
 <p>The patterns are applied in the order of declaration to the whole output
 of the syntax checker.  Output already matched by a pattern will not be
 matched by subsequent patterns.  In other words, the first pattern wins.
-</p>
-<p>May not be specified together with <code>:error-parser</code>.
 </p>
 </dd>
 <dt><code>:modes '<var>major-mode</var></code></dt>
@@ -409,6 +410,9 @@ Next: <a href="#Option-filters" accesskey="n" rel="next">Option filters</a>, Pre
 checkers:
 </p>
 <dl compact="compact">
+<dt><code>flycheck-parse-with-patterns</code></dt>
+<dd><p>Parse output with the <code>:error-patterns</code> of the syntax checker.
+</p></dd>
 <dt><code>flycheck-parse-checkstyle</code></dt>
 <dd><p>Parse XML output similar to <a href="http://checkstyle.sourceforge.net/">Checkstyle</a>.
 </p></dd>
