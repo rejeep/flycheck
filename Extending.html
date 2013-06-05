@@ -301,12 +301,13 @@ modes.
 <dt><code>:predicate <var>form</var></code></dt>
 <dd><p>A predicate that determines whether the syntax checker may be used.
 </p>
-<p><var>form</var> is a quoted Emacs Lisp form.  It is evaluated before each
-syntax check to determine whether the syntax checker may be used for the
-current buffer.  If <var>form</var> evaluates to nil, the syntax checker is
-not used.
+<p><var>form</var> is a quoted Emacs Lisp form.  The <var>form</var> is wrapped into
+a function and compiled during byte compiled.  This function is called
+before each syntax check to determine whether the syntax checker may be
+used for the current buffer.  If <var>form</var> returns nil, the syntax
+checker is not used.
 </p>
-<p>If <var>:modes</var> is given, <var>form</var> is only evaluated if the major mode
+<p>If <var>:modes</var> is given, <var>form</var> is only called if the major mode
 matches.  Otherwise the syntax checker is not used.
 </p>
 </dd>
