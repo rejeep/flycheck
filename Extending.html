@@ -165,7 +165,8 @@ or was modified, for otherwise the syntax check will fail or return
 out-dated errors:
 </p>
 <div class="lisp">
-<pre class="lisp">:predicate (and (buffer-file-name) (not (buffer-modified-p)))
+<pre class="lisp">:predicate #'(lambda () (and (buffer-file-name)
+                             (not (buffer-modified-p)))
 </pre></div>
 
 </dd>
@@ -298,14 +299,21 @@ syntax checker will only be used in buffers with any of the given major
 modes.
 </p>
 </dd>
-<dt><code>:predicate <var>form</var></code></dt>
-<dd><p>A predicate that determines whether the syntax checker may be used.
+<dt><code>:predicate #'<var>function</var></code></dt>
+<dt><code>:predicate #'(lambda () <var>body</var>)))</code></dt>
+<dt><code>:predicate '<var>form</var></code></dt>
+<dd><p>A predicate function that determines whether the syntax checker may be
+used.
 </p>
-<p><var>form</var> is a quoted Emacs Lisp form.  The <var>form</var> is wrapped into
-a function and compiled during byte compiled.  This function is called
-before each syntax check to determine whether the syntax checker may be
-used for the current buffer.  If <var>form</var> returns nil, the syntax
-checker is not used.
+<p><var>FUNCTION</var> is called before each syntax check to determine whether
+the syntax checker may be used for the current buffer.  If
+<var>function</var> returns nil, the syntax checker is not used.  Of course,
+you may also use a lambda expression with <var>BODY</var>.  See <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Lambda-Expression.html#Lambda-Expression">(elisp)Lambda
+Expression</a>, for more information on lambda expression.
+</p>
+<p>Alternatively, you may also specify a <var>form</var> which is then evaluated
+to determine whether the syntax checker may used.  However, this usage
+is obsolete.
 </p>
 <p>If <var>:modes</var> is given, <var>form</var> is only called if the major mode
 matches.  Otherwise the syntax checker is not used.
