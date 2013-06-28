@@ -1,0 +1,221 @@
+#+TITLE: The Flycheck manual
+#+LANGUAGE: en
+#+TEXINFO_DIR_CATEGORY: Emacs
+#+TEXINFO_DIR_TITLE: Flycheck
+#+TEXINFO_DIR_DESC: On the fly syntax checking (aka ``flymake done right'')
+
+#+LINK: gh https://github.com/
+
+#+BEGIN_TEXINFO
+@syncodeindex vr cp
+@syncodeindex fn cp
+@syncodeindex tp cp
+#+END_TEXINFO
+
+#+TEXINFO: @ifhtml
+#+HTML: <div id="frontmatter">
+#+BEGIN_CENTER
+Flycheck is a modern on-the-fly syntax checker for GNU Emacs 24 (aka “Flymake
+done right”)
+
+Proceed to the [[Introduction]] for more information
+
+[[file:screenshot.png]]
+#+END_CENTER
+#+HTML: </div>
+#+TEXINFO: @end ifhtml
+
+* Copying
+  :PROPERTIES:
+  :COPYING:  t
+  :END:
+
+  This manual is for Flycheck, a modern on-the-fly syntax checker for GNU Emacs.
+
+  Copyright © 2013 Sebastian Wiesner
+
+  #+BEGIN_QUOTE
+    Permission is granted to copy, distribute and/or modify this document under
+    the terms of the GNU Free Documentation License, Version 1.3 or any later
+    version published by the Free Software Foundation; with no Invariant
+    Sections, no Front-Cover Texts, and no Back-Cover Texts.  A copy of the
+    license is included in the section entitled “GNU Free Documentation
+    License”.
+  #+END_QUOTE
+
+* Introduction
+  :PROPERTIES:
+  :DESCRIPTION: Introduce Flycheck, aka “Flymake done right”
+  :END:
+
+  Flycheck (aka “Flymake done right”) is a modern on-the-fly syntax checking
+  extension for GNU Emacs 24 with
+
+  - ready-to-use syntax checkers for a bunch of languages,
+  - easy customization,
+  - a comprehensive manual,
+  - a dead simple, declarative API to create new syntax checkers,
+  - major-mode based selection of syntax checkers,
+  - multiple syntax checkers per buffer,
+  - optional error list popup,
+  - a “doesn't get in your way” guarantee,
+  - and a clean, concise and understandable implementation with decent test
+    coverage.
+
+  #+TEXINFO: @ifhtml
+
+    And this is how it looks in action, using the awesome [[gh:bbatsov/solarized-emacs][solarized-light]] color
+    theme:
+
+    #+BEGIN_CENTER
+    [[file:screenshot.png]]
+    #+END_CENTER
+
+  #+TEXINFO: @end ifhtml
+
+** Features
+   :PROPERTIES:
+   :DESCRIPTION: What Flycheck can do for you
+   :END:
+
+   - Automatic on-the-fly syntax checking while editing
+   - Fully automatic selection of the syntax checker
+   - Optional manual selection of a syntax checker with
+     =flycheck-select-checker= at ~C-c ! s~
+   - Built-in syntax checkers for:
+     - CoffeeScript (using ~coffeelint~)
+     - CSS (using ~csslint~))
+     - Elixir (using ~elixirc~)
+     - Emacs Lisp (using the byte compiler and CheckDoc)
+     - Erlang (using ~erlc~)
+     - Go (using ~gofmt~, ~go build~ and ~go test~)
+     - Haml
+     - HTML (using ~tidy~)
+     - Javascript (using ~jshint~)
+     - JSON (using ~jsonlint~)
+     - Lua
+     - Perl
+     - PHP (using the PHP Command Line and PHP CodeSniffer)
+     - Puppet (using ~puppet parser~ and ~puppet-lint~)
+     - Python (using ~flake8~, ~pylint~, or ~pyflakes~)
+     - Ruby (using ~rubocop~, ~ruby~ or ~jruby~)
+     - Rust (using ~rustc~)
+     - RST (ReStructuredText, using Docutils)
+     - Sass
+     - Scala
+     - SCSS
+     - Shell scripts (using Bash, Dash, or Zsh depending on the type of shell
+       script)
+     - TeX/LaTeX (using ~chktex~ or ~lacheck~)
+     - XML (using ~xmlstarlet~)
+   - Nice error indication and highlighting
+   - Easy customization
+   - Syntax checker configuration with project-specific configuration files
+     and options
+   - Error navigation with =next-error= and =previous-error=
+   - Error list with =flycheck-list-errors= at ~C-c ! l~
+   - Easy declarative API to define new syntax checkers
+   - Error parsers for structured markup formats (e.g. Checkdoc XML)
+
+*** 3rd party extensions
+
+    The following extensions provide additional cool features for Flycheck:
+
+    - [[gh:syl20bnr/flycheck-color-mode-line][flycheck-color-mode-line.el]]
+
+** Installation
+   :PROPERTIES:
+   :DESCRIPTION: How to install Flycheck
+   :END:
+
+   Install the ELPA package from [[http://melpa.milkbox.net][MELPA]] or [[http://marmalade-repo.org/][Marmalade]] using ~M-x package-install
+   RET flycheck~.  The former is the /recommended/ repository.
+
+   Neither of these repositories is included in GNU Emacs by default.  You need
+   to enable these repositories explicitly.  For instance, to add the MELPA
+   repository, add the following code to ~init.el~:
+
+   #+BEGIN_SRC emacs-lisp
+     (require 'package)
+     (add-to-list 'package-archives
+                  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+     (package-initialize)
+   #+END_SRC
+
+   Flycheck supports GNU Emacs 24.2 and newer on Linux, OS X and any other
+   decent flavor of Unix.  It should work with GNU Emacs 24.1, too, but it is
+   not tested against this version of Emacs.
+
+   Flycheck does not support Windows, but tries to be compatible with it.  You
+   may try to use Flycheck on Windows.  It should mostly work, but expect
+   problems and issues.  Pull requests which improve Windows compatibility are
+   welcome.
+
+   Flycheck also does not support GNU Emacs 23 and other flavors of Emacs
+   (e.g. XEmacs, Aquamacs, etc.).  Don't try, it will /not/ work.
+
+   Most checkers depend on external tools to perform the actual syntax checking.
+   Use =flycheck-describe-checker= to get help about a syntax checker and its
+   dependencies.
+
+** Activation
+   :PROPERTIES:
+   :DESCRIPTION: How to activate Flycheck for on-the-fly checking
+   :END:
+
+   Once installed, enable Flycheck mode with ~M-x flycheck-mode~.  To
+   automatically enable Flycheck in all buffers, in which it can be used, add
+   the following to your ~init.el~ file:
+
+   #+BEGIN_EXAMPLE
+     (add-hook 'after-init-hook #'global-flycheck-mode)
+   #+END_EXAMPLE
+
+* Usage
+  :PROPERTIES:
+  :DESCRIPTION: How to use Flycheck for on-the-fly syntax checking
+  :END:
+
+* Extending
+  :PROPERTIES:
+  :DESCRIPTION: How to extend Flycheck with new syntax checkers
+  :END:
+
+* API
+  :PROPERTIES:
+  :DESCRIPTION: An overview about the Flycheck API
+  :END:
+
+* Contribution
+  :PROPERTIES:
+  :DESCRIPTION: How to contribute to Flycheck development
+  :END:
+
+* Changes
+  :PROPERTIES:
+  :DESCRIPTION: Changes to Flycheck
+  :END:
+
+* Credits
+  :PROPERTIES:
+  :DESCRIPTION: Developers and contributors to Flycheck
+  :END:
+
+  Flycheck uses the [[info:cl#Top][cl-lib]] now
+
+* GNU Free Documentation License
+  :PROPERTIES:
+  :DESCRIPTION: The license of this documentation
+  :END:
+
+* Syntax checkers
+  :PROPERTIES:
+  :DESCRIPTION: All available syntax checkers
+  :END:
+
+* Type, Function and Variable Definition Index
+  :PROPERTIES:
+  :INDEX:    cp
+  :DESCRIPTION: An index of all types, functions and variables
+  :ALT_TITLE: Index
+  :END:
