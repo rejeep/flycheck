@@ -542,10 +542,27 @@ error was fully processed and inhibit any further processing.
 </p></dd>
 </dl>
 
-<p>To view an error message, either hover the mouse of the highlighted
-error, or move the point to the highlighted error and wait for a short
-moment to see the error message in the echo area.  You can also copy the
-error message into kill ring, or google it straight from Emacs:
+<p>If you hover a highlighted error with the mouse, a tooltip with the
+top-most error message will be shown.
+</p>
+<p>Flycheck also displays errors under point, via
+<code>flycheck-display-errors-function</code>:
+</p>
+<dl>
+<dt><a name="index--"></a>User Option: <strong>
+</strong></dt>
+<dd><p>A function to display errors under point.
+</p>
+<p>If set to a function, call the function with a list of all errors to
+show.  If set to nil, to not display errors at all.
+</p>
+<p>The default function <code>flycheck-display-error-messages</code> shows all
+error messages separated by empty lines in the echo area or in a
+separate buffer depending on the number of messages.
+</p></dd></dl>
+
+<p>You can also work with the error messages at point, and copy them into
+the kill ring or search them on Google:
 </p>
 <dl compact="compact">
 <dt><kbd>C-c ! C-w</kbd></dt>
