@@ -696,7 +696,16 @@ Previous: <a href="#g_t0_002e13" accesskey="p" rel="previous">0.13</a>, Up: <a h
 <h3 class="unnumberedsec">master (unreleased)</h3>
 
 <ul>
-<li> New syntax checkers:
+<li> <b>Breaking changes</b>:
+
+<ul>
+<li> <a href="https://github.com/lunaryorn/flycheck/issues/163">Obsolete <code>flycheck-declare-checker</code> in favor of
+<code>flycheck-define-checker</code></a>
+</li><li> Remove the obsolete <code>flycheck-error-face</code> and
+<code>flycheck-warning-face</code>
+</li></ul>
+
+</li><li> New syntax checkers:
 
 <ul>
 <li> <a href="https://github.com/lunaryorn/flycheck/issues/160">LESS</a>
@@ -711,6 +720,13 @@ and <code>hlint</code></a>
 <code>html-tidy</code> syntax checker
 </li><li> <a href="https://github.com/lunaryorn/flycheck/issues/159">Support Rubocop 0.9 and drop support for older Rubocop
 releases</a>
+</li></ul>
+
+</li><li> Bug fixes:
+
+<ul>
+<li> Fix warnings about flawed definitions in <code>emacs-lisp</code> and
+<code>emacs-lisp-checkdoc</code>, caused by faulty formatting of sexps
 </li></ul>
 
 </li></ul>

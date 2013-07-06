@@ -69,54 +69,54 @@ Next: <a href="API.html#API" accesskey="n" rel="next">API</a>, Previous: <a href
 <h2 class="chapter">3 Extending</h2>
 
 <a href="https://github.com/lunaryorn/flycheck"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
-<p>Flycheck is extensible with new syntax checkers.  This chapter explains
-how to do so, and provides examples for common use cases.
+<p>This chapter explains how to add new syntax checkers to Flycheck, and
+provides examples for common use cases.
 </p>
-<p>If you implement new syntax checkers, please consider <b>contributing</b>
-these.  See <a href="Contribution.html#Contributing-syntax-checkers">Contributing syntax checkers</a>, for more information.
+<p>If you define a new syntax checker, <em>please</em> contribute it to
+Flycheck to make it available to other users, too.  See <a href="Contribution.html#Contributing-syntax-checkers">Contributing syntax checkers</a>, for more information.
 </p>
 <table class="menu" border="0" cellspacing="0">
-<tr><td align="left" valign="top">&bull; <a href="#Declaration" accesskey="1">Declaration</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to declare syntax checkers
+<tr><td align="left" valign="top">&bull; <a href="#Definition" accesskey="1">Definition</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to define syntax checkers
 </td></tr>
 <tr><td align="left" valign="top">&bull; <a href="#Error-parsers" accesskey="2">Error parsers</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Built-in error parsers
 </td></tr>
 <tr><td align="left" valign="top">&bull; <a href="#Option-filters" accesskey="3">Option filters</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Built-in option filters
 </td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#Examples" accesskey="4">Examples</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Examples on how to declare syntax checkers
+<tr><td align="left" valign="top">&bull; <a href="#Examples" accesskey="4">Examples</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Examples on how to define syntax checkers
 </td></tr>
 </table>
 
 <hr>
-<a name="Declaration"></a>
+<a name="Definition"></a>
 <div class="header">
 <p>
 Next: <a href="#Error-parsers" accesskey="n" rel="next">Error parsers</a>, Previous: <a href="#Extending" accesskey="p" rel="previous">Extending</a>, Up: <a href="#Extending" accesskey="u" rel="up">Extending</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Definition-Index.html#Definition-Index" title="Index" rel="index">Index</a>]</p>
 </div>
-<a name="Declaration-of-syntax-checkers"></a>
-<h3 class="section">3.1 Declaration of syntax checkers</h3>
+<a name="Definition-of-syntax-checkers"></a>
+<h3 class="section">3.1 Definition of syntax checkers</h3>
 
-<p>Checkers are declared with <code>flycheck-declare-checker</code>:
+<p>You define new syntax checkers with <code>flycheck-define-checker</code>:
 </p>
 <dl>
-<dt><a name="index-flycheck_002ddeclare_002dchecker"></a>Macro: <strong>flycheck-declare-checker</strong> <em>symbol docstring &amp;rest properties</em></dt>
-<dd><p>Declare SYMBOL as new syntax checker with PROPERTIES.
+<dt><a name="index-flycheck_002ddefine_002dchecker"></a>Macro: <strong>flycheck-define-checker</strong> <em>symbol docstring &amp;rest properties</em></dt>
+<dd><p>Define <var>symbol</var> as new syntax checker with <var>docstring</var> and
+<var>properties</var>.
 </p>
-<p>DOCSTRING provides documentation for the syntax checker.
+<p><var>docstring</var> provides documentation for the syntax checker.  Use
+<kbd>C-c ! ?</kbd> or <kbd>M-x flycheck-describe-checker</kbd> to view the
+documentation of a syntax checker.
 </p>
-<p>The PROPERTIES specify the new syntax checker:
+<p>The following <var>properties</var> constitute a syntax checker:
 </p>
 <dl compact="compact">
-<dt><code>:command '(<var>executable</var> <var>arguments</var>...)</code></dt>
-<dd><p>A list providing the command to execute.  The command consists of an
-<var>executable</var> specified as string in the <code>car</code>, and the
-<var>arguments</var> for this executable in the <code>cdr</code>.  See <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/List-elements.html#List-elements">(elisp)List
-elements</a>, for more information about the elements of a list.
+<dt><code>:command (<var>command</var> <var>arg</var> ...)</code></dt>
+<dd><p>An unquoted list describing the syntax checker command to execute.
 </p>
-<p>The <var>executable</var> is checked for existence with
-<code>executable-find</code> before executing the syntax checker.
+<p><var>command</var> is checked for existence with <code>executable-find</code>
+before executing a syntax checker.
 </p>
-<p>In <var>arguments</var>, various special symbols are substituted before
-executing the syntax checker:
+<p>In <var>command</var> and <var>arg</var>, the following special symbols and sexps
+are substituted before executing the syntax checker:
 </p>
 <dl compact="compact">
 <dt><code>source</code></dt>
@@ -127,10 +127,10 @@ system&rsquo;s temporary directory.
 <p>If the buffer to check has a file name, the non-directory component of
 the name of the temporary file will be the same as in the buffer&rsquo;s file
 name, to support languages which enforce specific rules on the file name
-(e.g. the file must be named after the containing class).
+(e.g. the file must be named after the containing feature, class, etc.).
 </p>
 <p>If the buffer to check has no file name, the name of the temporary file
-will be random.
+is random.
 </p>
 <p>This symbol is the <b>preferred</b> way to pass the input file to your
 syntax checker.
@@ -158,15 +158,15 @@ string, if the buffer has no file name.
 file to check to a syntax checker.
 </p>
 <p>It should <b>never</b> be used as primary input to the syntax checker,
-unless both <code>source</code> and <code>source-original</code> are totally not
+unless both <code>source</code> and <code>source-original</code> are absolutely not
 applicable.  In this case, be sure to add a predicate to your syntax
 checker that inhibits the syntax check, if the buffer has no file name,
 or was modified, for otherwise the syntax check will fail or return
 out-dated errors:
 </p>
 <div class="lisp">
-<pre class="lisp">:predicate #'(lambda () (and (buffer-file-name)
-                             (not (buffer-modified-p)))
+<pre class="lisp">:predicate (lambda () (and (buffer-file-name)
+                           (not (buffer-modified-p)))
 </pre></div>
 
 </dd>
@@ -236,136 +236,132 @@ before it is evaluated, nor in the result of evaluating FORM.
 <p>This property is <b>mandatory</b>.
 </p>
 </dd>
-<dt><code>:error-parser '<var>parser</var></code></dt>
-<dd><p>An error parser to use for parsing the output of the syntax checker.
+<dt><code>:error-patterns ((<var>level</var> <var>sexp</var>) ...)</code></dt>
+<dd><p>An unquoted list of one or more error patterns to parse the output of
+the syntax checker <code>:command</code>.
 </p>
-<p>The <var>parser</var> is a function symbol.  See <a href="#Error-parsers">Error parsers</a>, for more
-information about error parsers, including a list of built-in error
-parsers.
+<p><var>level</var> is either <code>warning</code> or <code>error</code> and denotes the
+severity of errors matched by the pattern.
 </p>
-<p>Using a error parser is preferred if a syntax checker provides a
-structured output format like XML or JSON.  If possible, re-use one of
-the built-in error parsers listed in <a href="#Error-parsers">Error parsers</a>.
-</p>
-<p>An error parser takes precedence over <code>:error-patterns</code>.  To use an
-error parser together with patterns, you must manually call
-<code>flycheck-parse-output-with-patterns</code> in your error parser to parse
-with error patterns first.  You can the post-process the errors returned
-by this function.
-</p>
-</dd>
-<dt><code>:error-patterns '((<var>regexp</var> <var>level</var>)...)</code></dt>
-<dd><p>A list of one or more error patterns to parse the output of
-<code>:command</code>.
-</p>
-<p>The <var>regexp</var> is a regular expression matching a single error or
-warning.  The <var>level</var> is either <code>error</code> or <code>warning</code> and
-classifies the severity of the matched error message.
-</p>
-<p>Do <b>not</b> use error patterns if you can use an error parser.
-</p>
-<p>The <var>regexp</var> may provide the following match groups:
+<p>The <var>level</var> is followed by one or more <code>rx</code> <var>sexp</var>
+elements.  See the docstring of the function <code>rx</code> for more
+information.  In addition to the standard forms of <code>rx</code>, Flycheck
+supports the following additional forms to make specific parts of the
+error output available to Flycheck:
 </p>
 <dl compact="compact">
-<dt><em>Group 1</em></dt>
-<dd><p>The file name.
-</p></dd>
-<dt><em>Group 2</em></dt>
-<dd><p>The line number.
-</p></dd>
-<dt><em>Group 3</em></dt>
-<dd><p>The column number.
-</p></dd>
-<dt><em>Group 4</em></dt>
-<dd><p>The error text.
+<dt><code>line</code></dt>
+<dd><p>Matches the line number the error refers to, as a sequence of one or
+more digits.
+</p>
+</dd>
+<dt><code>column</code></dt>
+<dd><p>Matches a column number the error refers to, as a sequence of one or
+more digits.
+</p>
+</dd>
+<dt><code>(file-name <var>sexp</var> ...)</code></dt>
+<dd><p>Matches the file name the error refers to.  <var>sexp</var> matches the name
+of the file.  If no <var>sexp</var> is given, use a default body of
+<code>(minimal-match (one-or-more not-newline))</code>, which is equivalent to
+<code>&quot;.+?&quot;</code>.
+</p>
+</dd>
+<dt><code>(message <var>sexp</var> ...)</code></dt>
+<dd><p>Matches the error message to be shown to the user.  <var>sexp</var> matches
+the text of the message.  If no <var>sexp</var> is given, use a default body
+of <code>(one-or-more not-newline)</code>, which is equivalent to <code>&quot;.+&quot;</code>.
 </p></dd>
 </dl>
 
-<p>Each of these groups is optional, however error messages without line
-numbers will be ignored.  Use <b>explicitly numbered groups</b> to make
-sure that the group numbering is correct.  See <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Regexp-Backslash.html#Regexp-Backslash">(elisp)Regexp Backslash</a>, for more information about regular expression groups.
+<p>Each of these items is optional, however error messages without a
+<code>line</code> will be ignored and are not shown in the buffer.
 </p>
 <p>The patterns are applied in the order of declaration to the whole output
 of the syntax checker.  Output already matched by a pattern will not be
 matched by subsequent patterns.  In other words, the first pattern wins.
 </p>
 </dd>
-<dt><code>:modes '<var>major-mode</var></code></dt>
-<dt><code>:modes '(<var>major-mode</var>...)</code></dt>
-<dd><p>A single <var>major-mode</var>, or a list thereof.
+<dt><code>:error-parser <var>function</var></code></dt>
+<dt><code>:error-parser (lambda (ouptut checker buffer) <var>body</var> ...)</code></dt>
+<dd><p>A function to parse the output of the syntax checker, either as unquoted
+function symbol or <code>lambda</code> form.
 </p>
-<p><var>major-mode</var> is a symbol referring to a major mode.  If given the
-syntax checker will only be used in buffers with any of the given major
-modes.
+<p>The function must accept three arguments <var>output</var>, <var>checker</var> and
+<var>buffer</var>, where <var>output</var> is the output of the syntax checker as
+string, <var>checker</var> the syntax checker that was used, and
+<code>buffer</code> a buffer object representing the checker buffer.
 </p>
-</dd>
-<dt><code>:predicate #'<var>function</var></code></dt>
-<dt><code>:predicate #'(lambda () <var>body</var>)))</code></dt>
-<dt><code>:predicate '<var>form</var></code></dt>
-<dd><p>A predicate function that determines whether the syntax checker may be
-used.
+<p>The function must return a list of <code>flycheck-error</code> objects parsed
+from <var>output</var>.  See <a href="API.html#Error-API">Error API</a>, for information about
+<code>flycheck-error</code>.  See <a href="#Error-parsers">Error parsers</a>, for a list of built-in
+error parsers.
 </p>
-<p><var>FUNCTION</var> is called before each syntax check to determine whether
-the syntax checker may be used for the current buffer.  If
-<var>function</var> returns nil, the syntax checker is not used.  Of course,
-you may also use a lambda expression with <var>BODY</var>.  See <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Lambda-Expression.html#Lambda-Expression">(elisp)Lambda
-Expression</a>, for more information on lambda expression.
-</p>
-<p>Alternatively, you may also specify a <var>form</var> which is then evaluated
-to determine whether the syntax checker may used.  However, this usage
-is obsolete.
-</p>
-<p>If <var>:modes</var> is given, <var>form</var> is only called if the major mode
-matches.  Otherwise the syntax checker is not used.
+<p>If this property is given, it takes precedence over
+<code>:error-patterns</code>.  To use an error parser together with patterns,
+you must manually call <code>flycheck-parse-output-with-patterns</code> in
+your error parser to apply the error patterns.  You can then manipulate
+the <code>flycheck-error</code> objects returned by this function.
 </p>
 </dd>
-<dt><code>:next-checker '(<var>item</var>...)</code></dt>
-<dd><p>A list of syntax checker to run after this syntax checker.
+<dt><code>:modes <var>mode</var></code></dt>
+<dt><code>:modes (<var>mode</var>...)</code></dt>
+<dd><p>An unquoted major mode symbol or an unquoted list thereof.
 </p>
-<p>Each <var>item</var> is either a single syntax checker symbol, or a cons cell
-<code>(<var>predicate</var> . <var>checker</var>)</code>.  Each <var>item</var> is tried on
-the order of declaration.
+<p>If given, this syntax checker is only used, if the major mode of the
+buffer to check is equal (as in <code>eq</code>) to any given <var>mode</var>.
 </p>
-<p>If the <var>item</var> is a syntax checker symbol, determine whether it is
-usable <b>and</b> registered (i.e. contained in <code>flycheck-checkers</code>).
-If so start a new syntax check with that syntax checker, and merged its
-results with the results of this syntax checker.  If not, try the next
-<var>item</var>.
+</dd>
+<dt><code>:predicate <var>function</var></code></dt>
+<dt><code>:error-parser (lambda () <var>body</var> ...)</code></dt>
+<dd><p>A function to determines whether to use this syntax checker in the
+current buffer, either as unquoted function symbol or as <code>lambda</code>
+form.  The syntax checker is only used if this function returns non-nil
+when called in the buffer to check.
 </p>
-<p>If <var>item</var> is a cons cell, <var>predicate</var> specifies whether to run
-the <var>checker</var> depending on the results of this syntax checker:
+<p>If <var>:modes</var> is given, the function is only called in matching major
+modes.  That means, if both <code>:modes</code> and <code>:predicate</code> are
+given, <b>both</b> must match for this syntax checker to be used.
+</p>
+</dd>
+<dt><code>:next-checker (<var>item</var> ...)</code></dt>
+<dd><p>An unquoted list defining the syntax checker to run after this checker.
+</p>
+<p>Each <var>item</var> is either a syntax checker symbol or a cons cell
+<code>(<var>predicate</var> . <var>checker</var>)</code>.  In the former case, the
+syntax checker is always considered.  In the later case, <var>checker</var>
+is only considered if the <var>predicate</var> matches.
+</p>
+<p><var>predicate</var> is either <code>no-errors</code> or <code>warnings-only</code>:
 </p>
 <dl compact="compact">
 <dt><code>no-errors</code></dt>
-<dd><p>The <var>checker</var> is only used if this syntax checker resulted in no
-errors at all.
+<dd><p>The syntax <var>checker</var> is only considered if this syntax checker
+reported no errors at all.
 </p></dd>
 <dt><code>warnings-only</code></dt>
-<dd><p>The <var>checker</var> is only used if this syntax checker did not result in
-error messages of severity <code>error</code>.
+<dd><p>The syntax <var>checker</var> is only considered if this syntax checker only
+reported warnings, but no errors.
 </p></dd>
 </dl>
-
-<p>If the predicate matches, and <var>checker</var> is usable and registered,
-start a new syntax checker with <var>checker</var> and merged its results
-with the results of this syntax checker.  If not, try the next
-<var>item</var>.
-</p>
-<p>If there is no further <var>item</var>, finish the syntax check.
-</p></dd>
+</dd>
 </dl>
 
-<p>At least on of <code>:modes</code> and <code>:predicate</code> must be present.  If
-both are present, both must match for the syntax checker to be used.
+<p><code>:command</code> is <b>mandatory</b>.  A syntax checker must also have at
+least one of <code>:modes</code> and <code>:predicate</code>, and at least one of
+<code>:error-patterns</code> or <code>:error-parser</code> are present, an error is
+signaled.  If <code>:predicate</code> and <code>:modes</code> are given, both must
+match for the syntax checker to be used.  <code>:next-checkers</code> is
+entirely optional.
 </p>
-<p>Either <code>:error-patterns</code> or <code>:error-parser</code> must be present.
-If both are present, an error is signaled.
+<p>If any property has an invalid value, a (compile-time) error is
+signaled.
 </p></dd></dl>
 
-<p>A syntax checker declared with <code>flycheck-declare-checker</code> is
-already suitable for manual checker selection with
-<code>flycheck-select-checker</code>.  For automatic selection the syntax
-checker must be registered by adding it to <code>flycheck-checkers</code>.
+<p>A syntax checker define with <code>flycheck-define-checker</code> is already
+suitable for manual checker selection with
+<code>flycheck-select-checker</code>.  To make the syntax checker available
+for automatic selection, add it to <code>flycheck-checkers</code>.
 See <a href="Usage.html#Selection">Selection</a>.
 </p>
 <dl>
@@ -407,13 +403,14 @@ syntax checker.
 <a name="Error-parsers"></a>
 <div class="header">
 <p>
-Next: <a href="#Option-filters" accesskey="n" rel="next">Option filters</a>, Previous: <a href="#Declaration" accesskey="p" rel="previous">Declaration</a>, Up: <a href="#Extending" accesskey="u" rel="up">Extending</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Definition-Index.html#Definition-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Option-filters" accesskey="n" rel="next">Option filters</a>, Previous: <a href="#Definition" accesskey="p" rel="previous">Definition</a>, Up: <a href="#Extending" accesskey="u" rel="up">Extending</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Definition-Index.html#Definition-Index" title="Index" rel="index">Index</a>]</p>
 </div>
 <a name="Error-parsers-1"></a>
 <h3 class="section">3.2 Error parsers</h3>
 
 <p>Syntax checkers may use more sophisticated error parsing by using the
-<code>:error-parser</code> property.  See <a href="#Declaration">Declaration</a>.
+<code>:error-parser</code> property.  See <a href="#Definition">Definition</a>, for information about
+syntax checker definition.
 </p>
 <p>Flycheck provides the following error parsers for use by syntax
 checkers:
@@ -477,7 +474,7 @@ Previous: <a href="#Option-filters" accesskey="p" rel="previous">Option filters<
 <h3 class="section">3.4 Examples of syntax checkers</h3>
 
 <table class="menu" border="0" cellspacing="0">
-<tr><td align="left" valign="top">&bull; <a href="#Simple-example" accesskey="1">Simple example</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to declare basic syntax checkers
+<tr><td align="left" valign="top">&bull; <a href="#Simple-example" accesskey="1">Simple example</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to define a basic syntax checker
 </td></tr>
 <tr><td align="left" valign="top">&bull; <a href="#Predicate-example" accesskey="2">Predicate example</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to control syntax checker usage
 </td></tr>
@@ -497,19 +494,19 @@ Next: <a href="#Predicate-example" accesskey="n" rel="next">Predicate example</a
 <h4 class="subsection">3.4.1 Basic syntax checkers</h4>
 
 <p>As explained in the previous chapter <a href="#Extending">Extending</a> a syntax checker is
-declared with <code>flycheck-declare-checker</code>.
+declared with <code>flycheck-define-checker</code>.
 </p>
-<p>We will use this function to declare a syntax checker using the
+<p>We will use this function to define a syntax checker using the PHP
 CodeSniffer utility for the PHP programming language:
 </p>
 <div class="lisp">
-<pre class="lisp">(flycheck-declare-checker php-phpcs
+<pre class="lisp">(flycheck-define-checker php-phpcs
   &quot;A PHP syntax checker using PHP_CodeSniffer.
 
 See URL `http://pear.php.net/package/PHP_CodeSniffer/'.&quot;
-  :command '(&quot;phpcs&quot; &quot;--report=checkstyle&quot; source)
-  :error-parser 'flycheck-parse-checkstyle
-  :modes 'php-mode)
+  :command (&quot;phpcs&quot; &quot;--report=checkstyle&quot; source)
+  :error-parser flycheck-parse-checkstyle
+  :modes php-mode)
 </pre></div>
 
 <p>First we specify the <code>:command</code> to execute.  The first element of
@@ -536,16 +533,20 @@ do so, we can use <em>error patterns</em>, like in the Pylint syntax
 checker for the Python programming language:
 </p>
 <div class="lisp">
-<pre class="lisp">(flycheck-declare-checker python-pylint
-  &quot;A Python syntax and style checker using the pylint utility.
+<pre class="lisp">(flycheck-define-checker python-pylint
+  &quot;A Python syntax and style checker using Pylint.
 
 See URL `http://pypi.python.org/pypi/pylint'.&quot;
-  :command '(&quot;epylint&quot; source-inplace)
+  :command (&quot;epylint&quot; source-inplace)
   :error-patterns
-  '((&quot;^\\(?1:.*\\):\\(?2:[0-9]+\\): Warning (W.*): \\(?4:.*\\)$&quot; warning)
-    (&quot;^\\(?1:.*\\):\\(?2:[0-9]+\\): Error (E.*): \\(?4:.*\\)$&quot; error)
-    (&quot;^\\(?1:.*\\):\\(?2:[0-9]+\\): \\[F\\] \\(?4:.*\\)$&quot; error))
-  :modes 'python-mode)
+  ((warning line-start (file-name) &quot;:&quot; line
+            &quot;: Warning (W&quot; (zero-or-more not-newline) &quot;): &quot;
+            (message) line-end)
+   (error line-start (file-name) &quot;:&quot; line
+          &quot;: Error (E&quot; (zero-or-more not-newline) &quot;): &quot;
+          (message) line-end)
+   (error line-start (file-name) &quot;:&quot; line &quot;: [F] &quot; (message) line-end))
+  :modes python-mode)
 </pre></div>
 
 <p>Again, there is a <code>:command</code>, however we use the
@@ -555,7 +556,7 @@ making information from the source code tree available to the syntax
 checker.  In case of Pylint, these are the Python packages from the
 source code tree.
 </p>
-<p>Next we give the list of <em>error patterns</em> to parse errors.  These
+<p>Next we give the list of <code>:error-patterns</code> to parse errors.  These
 patterns extract the error location and the error message from the
 output of <code>epylint</code>.  An error pattern is a list containing a
 regular expression with match groups to extract the error information,
@@ -579,14 +580,15 @@ languages.  A syntax checker for a specific shell must check whether the
 edited shell script is written for the right shell:
 </p>
 <div class="lisp">
-<pre class="lisp">(flycheck-declare-checker zsh
-  &quot;A Zsh syntax checker using the zsh executable.
+<pre class="lisp">(flycheck-define-checker zsh
+  &quot;A Zsh syntax checker using the Zsh shell.
 
 See URL `http://www.zsh.org/'.&quot;
-  :command '(&quot;zsh&quot; &quot;-n&quot; &quot;-d&quot; &quot;-f&quot; source)
-  :error-patterns '((&quot;^\\(?1:.*\\):\\(?2:[0-9]+\\): \\(?4:.*\\)$&quot; error))
-  :modes 'sh-mode
-  :predicate '(eq sh-shell 'zsh))
+  :command (&quot;zsh&quot; &quot;-n&quot; &quot;-d&quot; &quot;-f&quot; source)
+  :error-patterns
+  ((error line-start (file-name) &quot;:&quot; line &quot;: &quot; (message) line-end))
+  :modes sh-mode
+  :predicate (lambda () (eq sh-shell 'zsh)))
 </pre></div>
 
 <p>This syntax checker for the Zsh shell is enabled in <code>sh-mode</code> as
@@ -602,19 +604,26 @@ still desirable.  Hence a JSON syntax checker may use the
 <code>:predicate</code> to check the file extension:
 </p>
 <div class="lisp">
-<pre class="lisp">(flycheck-declare-checker json-jsonlint
+<pre class="lisp">(flycheck-define-checker json-jsonlint
   &quot;A JSON syntax and style checker using jsonlint.
 
 See URL `https://github.com/zaach/jsonlint'.&quot;
-  :command '(&quot;jsonlint&quot; &quot;-c&quot; &quot;-q&quot; source)
+  :command (&quot;jsonlint&quot; &quot;-c&quot; &quot;-q&quot; source)
   :error-patterns
-  '((&quot;^\\(?1:.+\\)\: line \\(?2:[0-9]+\\), col \\(?3:[0-9]+\\), \\(?4:.+\\)$&quot;
-     error))
-  :predicate '(and buffer-file-name
-                   (string= &quot;json&quot; (file-name-extension buffer-file-name)))))
+  ((error line-start
+          (file-name)
+          &quot;: line &quot; line
+          &quot;, col &quot; column &quot;, &quot;
+          (message) line-end))
+  :predicate
+  (lambda ()
+    (or
+     (eq major-mode 'json-mode)
+     (and buffer-file-name
+          (string= &quot;json&quot; (file-name-extension buffer-file-name))))))
 </pre></div>
 
-<p>This syntax checker is now used whenever a file ends with .json,
+<p>This syntax checker is now used whenever a file ends with <code>.json</code>,
 regardless of the major mode.
 </p>
 <hr>
@@ -633,17 +642,17 @@ configuration files:
 <div class="lisp">
 <pre class="lisp">(flycheck-def-config-file-var flycheck-jshintrc javascript-jshint &quot;.jshintrc&quot;)
 
-(flycheck-declare-checker javascript-jshint
+(flycheck-define-checker javascript-jshint
   &quot;A JavaScript syntax and style checker using jshint.
 
 See URL `http://www.jshint.com'.&quot;
-  :command '(&quot;jshint&quot; &quot;--checkstyle-reporter&quot;
-             (config-file &quot;--config&quot; flycheck-jshintrc) source)
-  :error-parser 'flycheck-parse-checkstyle
-  :modes '(js-mode js2-mode js3-mode))
+  :command (&quot;jshint&quot; &quot;--checkstyle-reporter&quot;
+            (config-file &quot;--config&quot; flycheck-jshintrc) source)
+  :error-parser flycheck-parse-checkstyle
+  :modes (js-mode js2-mode js3-mode))
 </pre></div>
 
-<p>As you can see, we declare a syntax checker for Javascript, using the
+<p>As you can see, we define a syntax checker for Javascript, using the
 <code>jshint</code> utility.  This utility accepts a configuration file via
 the <samp>--config</samp> option.
 </p>
@@ -706,17 +715,17 @@ CodeSniffer.
 run PHP CodeSniffer if there are no syntax errors:
 </p>
 <div class="lisp">
-<pre class="lisp">(flycheck-declare-checker php
-  &quot;A PHP syntax checker using the PHP command line.
+<pre class="lisp">(flycheck-define-checker php
+  &quot;A PHP syntax checker using the PHP command line interpreter.
 
 See URL `http://php.net/manual/en/features.commandline.php'.&quot;
-  :command '(&quot;php&quot; &quot;-l&quot; &quot;-d&quot; &quot;error_reporting=E_ALL&quot; &quot;-d&quot; &quot;display_errors=1&quot;
-             &quot;-d&quot; &quot;log_errors=0&quot; source)
+  :command (&quot;php&quot; &quot;-l&quot; &quot;-d&quot; &quot;error_reporting=E_ALL&quot; &quot;-d&quot; &quot;display_errors=1&quot;
+            &quot;-d&quot; &quot;log_errors=0&quot; source)
   :error-patterns
-  '((&quot;\\(?:Parse\\|Fatal\\|syntax\\) error[:,] \\(?4:.*\\) in \\(?1:.*\\) on line \\(?2:[0-9]+\\)&quot;
-    error))
-  :modes 'php-mode
-  :next-checkers '((warnings-only . php-phpcs)))
+  ((error line-start (or &quot;Parse&quot; &quot;Fatal&quot; &quot;syntax&quot;) &quot; error&quot; (any &quot;:&quot; &quot;,&quot;) &quot; &quot;
+          (message) &quot; in &quot; (file-name) &quot; on line &quot; line line-end))
+  :modes (php-mode php+-mode)
+  :next-checkers ((warnings-only . php-phpcs)))
 </pre></div>
 
 <p>Now PHP CodeSniffer will check the coding style, whenever a PHP syntax
