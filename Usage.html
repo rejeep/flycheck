@@ -256,7 +256,7 @@ selection.
 buffer.  A syntax checker is suitable, if
 </p><ul>
 <li> it may be used for the current major mode,
-</li><li> it&rsquo;s predicate matches,
+</li><li> its predicate matches,
 </li><li> and if the syntax checking tool exists.
 </li></ul>
 
@@ -539,6 +539,8 @@ error was fully processed and inhibit any further processing.
 <dt><kbd>M-x flycheck-list-errors</kbd></dt>
 <dd><a name="index-flycheck_002dlist_002derrors"></a>
 <p>List all errors in the current buffer in a separate buffer.
+</p>
+<p>With prefix arg, list only errors at point.
 </p></dd>
 </dl>
 
@@ -555,10 +557,31 @@ top-most error message will be shown.
 <p>If set to a function, call the function with a list of all errors to
 show.  If set to nil, to not display errors at all.
 </p>
-<p>The default function <code>flycheck-display-error-messages</code> shows all
-error messages separated by empty lines in the echo area or in a
-separate buffer depending on the number of messages.
+<p>The default function is <code>flycheck-display-error-messages</code>.
 </p></dd></dl>
+
+<p>The following display functions are available:
+</p><dl compact="compact">
+<dt><code>flycheck-display-error-messages</code></dt>
+<dd><a name="index-flycheck_002ddisplay_002derror_002dmessages"></a>
+<p>Show error messages separated by empty lines in the echo area.  If the
+error messages are too long for the echo area, show the error messages
+in a popup buffer instead.
+</p>
+<p>See <code>display-message-or-buffer</code> for details on when popup buffers
+are used.
+</p>
+</dd>
+<dt><code>flycheck-display-errors-in-list</code></dt>
+<dd><a name="index-flycheck_002ddisplay_002derrors_002din_002dlist"></a>
+<p>Show errors in the error list from <code>flycheck-list-errors</code> or
+<kbd>C-c ! l</kbd>.
+</p>
+<p>Note that this function does <b>not</b> actually show the error list
+itself, but only adds the errors at point to it.  You need to open the
+error list manually with <kbd>C-c ! l</kbd> first.
+</p></dd>
+</dl>
 
 <p>You can also work with the error messages at point, and copy them into
 the kill ring or search them on Google:
