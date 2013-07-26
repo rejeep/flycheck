@@ -703,6 +703,8 @@ Previous: <a href="#g_t0_002e13" accesskey="p" rel="previous">0.13</a>, Up: <a h
 <code>flycheck-declare-checker</code></a>
 </li><li> Remove the obsolete <code>flycheck-error-face</code> and
 <code>flycheck-warning-face</code>
+</li><li> <a href="https://github.com/lunaryorn/flycheck/issues/176">Do not initialize packages by default in <code>emacs-lisp</code>
+syntax checker for non-configuration files</a>
 </li></ul>
 
 </li><li> New features:
@@ -713,6 +715,16 @@ Previous: <a href="#g_t0_002e13" accesskey="p" rel="previous">0.13</a>, Up: <a h
 </li><li> <a href="https://github.com/lunaryorn/flycheck/issues/166">Add new display function
 <code>flycheck-display-errors-in-list</code> to display errors at point in the
 error list</a>
+</li><li> New <code>option-list</code> argument cell to pass option lists to a syntax
+checker
+</li><li> <a href="https://github.com/lunaryorn/flycheck/issues/174">New <code>flycheck-emacs-lisp-load-path</code> option to
+customize the <code>load-path</code> used by the <code>emacs-lisp</code> syntax
+checker</a>
+</li><li> <a href="https://github.com/lunaryorn/flycheck/issues/176">New <code>flycheck-emacs-lisp-initialize-packages</code> option
+to initialize packages in the <code>emacs-lisp</code> syntax checker</a>
+</li><li> <a href="https://github.com/lunaryorn/flycheck/issues/176">New <code>flycheck-emacs-lisp-package-user-dir</code> option to
+configure the package directory for the <code>emacs-lisp</code> syntax
+checker</a>
 </li></ul>
 
 </li><li> New syntax checkers:
@@ -737,6 +749,8 @@ releases</a>
 <li> Fix warnings about flawed definitions in <code>emacs-lisp</code> and
 <code>emacs-lisp-checkdoc</code>, caused by faulty formatting of sexps
 </li><li> <a href="https://github.com/lunaryorn/flycheck/issues/166">Refresh error lists when pressing <kbd>g</kbd></a>
+</li><li> <a href="https://github.com/lunaryorn/flycheck/issues/175">Do not obscure active minibuffer input when displaying
+errors in the echo area</a>
 </li></ul>
 
 </li></ul>

@@ -223,6 +223,16 @@ the arguments of the syntax checker.
 <code>config-file</code> cell.
 </p>
 </dd>
+<dt><code>(option-list <var>option</var> <var>variable</var> [<var>filter</var>])</code></dt>
+<dd><p>This cell is similar to <code>option</code>, but for option lists.
+</p>
+<p>The value of <var>variable</var> must be a list, and <var>option</var> is prepend
+to each non-nil item in the list.  <var>filter</var> is an optional function
+to be applied to each item in the list before substitution.  Items for
+which the filter returns nil are dropped.  See <a href="#Option-filters">Option filters</a>, for a
+list of built-in option filters.
+</p>
+</dd>
 <dt><code>(eval <var>form</var>)</code></dt>
 <dd><p>This cell is substituted with a result of evaluating <var>form</var>.
 <var>form</var> must either return a string or a list of strings, or
@@ -233,6 +243,9 @@ before it is evaluated, nor in the result of evaluating FORM.
 </p></dd>
 </dl>
 
+<p>Note that substitution is <b>not</b> recursive.  No symbols or cells are
+substituted within the body of cells!
+</p>
 <p>This property is <b>mandatory</b>.
 </p>
 </dd>

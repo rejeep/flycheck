@@ -340,6 +340,34 @@ options are provided by Flycheck (use <kbd>C-h v</kbd> or <kbd>M-x
 describe-variable</kbd> on the variable name for detailed help):
 </p>
 <dl>
+<dt><a name="index-flycheck_002demacs_002dlisp_002dinitialize_002dpackages"></a>User Option: <strong>flycheck-emacs-lisp-initialize-packages</strong></dt>
+<dd><p>Whether to initialize packages (see <code>package-initialize</code>) before
+invoking the byte compiler in the <code>emacs-lisp</code> syntax checker.
+</p>
+<p>When <code>nil</code>, never initialize packages.  When <code>auto</code>,
+initialize packages only when checking files from the user&rsquo;s Emacs
+configuration in <code>user-emacs-directory</code>.  For any other non-nil
+value, always initialize packages.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-flycheck_002demacs_002dlisp_002dload_002dpath"></a>User Option: <strong>flycheck-emacs-lisp-load-path</strong></dt>
+<dd><p>The <code>load-path</code> to use while checking with <code>emacs-lisp</code>.
+</p>
+<p>The directory of the file being checked is always added to
+<code>load-path</code>, regardless of the value of this variable.
+</p>
+<p>Note that changing this variable can lead to wrong results of the
+syntax check, e.g. if an unexpected version of a required library
+is used.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-flycheck_002demacs_002dlisp_002dpackage_002duser_002ddir"></a>User Option: <strong>flycheck-emacs-lisp-package-user-dir</strong></dt>
+<dd><p>The package directory for the <code>emacs-lisp</code> syntax checker.
+</p></dd></dl>
+
+<dl>
 <dt><a name="index-flycheck_002dflake8_002dmaximum_002dcomplexity"></a>User Option: <strong>flycheck-flake8-maximum-complexity</strong></dt>
 <dd><p>The maximum McCabe complexity the <code>python-flake8</code> syntax checker
 allows without reporting a warning.
