@@ -520,25 +520,34 @@ theme that has reasonable Flycheck faces, for instance the excellent
 <dt><a name="index-flycheck_002dhighlighting_002dmode"></a>User Option: <strong>flycheck-highlighting-mode</strong></dt>
 <dd><p>This variable determines how to highlight errors:
 </p>
-<p>If set to <code>columns</code>, only highlight the error column.  If the error
-is not specific to a column, highlight the whole line.
+<dl compact="compact">
+<dt><code>columns</code></dt>
+<dd><p>Highlights the error column.  If the error does not have a column,
+highlight the whole line.
 </p>
-<p>If set to <code>sexps</code>, highlight the expression at the error column.
-If there is no expression at the error column, highlight the column
-only.  If the error is not specific to a column, highlight the whole
-line.  This mode is the default.
+</dd>
+<dt><code>symbols</code></dt>
+<dd><p>Highlights the symbol at the error column, if there is any, otherwise
+behave like <code>columns</code>.  This is the default.
 </p>
-<p>If set to <code>lines</code>, highlight the whole line the error refers to,
-regardless of whether the error is specific to a column.
+</dd>
+<dt><code>sexps</code></dt>
+<dd><p>Highlights the expression at the error column, if there is any,
+otherwise behave like <code>columns</code>.  Note that this mode can be
+<b>very</b> slow in some major modes.
 </p>
-<p>If set to <code>nil</code>, do not highlight errors at all.  However, errors
-will still be reported in the mode line and in error message popups, and
-indicated according to <code>flycheck-indication-mode</code>.
+</dd>
+<dt><code>lines</code></dt>
+<dd><p>Highlights the whole line of the error.
 </p>
-<p>Note that this variable does <em>not</em> affect error <em>navigation</em>.
-<code>next-error</code> and <code>previous-error</code> always jump to the error
-column, regardless of the highlighting mode.
-</p></dd></dl>
+</dd>
+<dt><code>nil</code></dt>
+<dd><p>Do not highlight errors at all.  However, errors will still be reported
+in the mode line and in error message popups, and indicated according to
+<code>flycheck-indication-mode</code>.
+</p></dd>
+</dl>
+</dd></dl>
 
 <dl>
 <dt><a name="index-flycheck_002dfringe_002derror"></a>Face: <strong>flycheck-fringe-error</strong></dt>

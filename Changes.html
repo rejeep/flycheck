@@ -638,6 +638,8 @@ Next: <a href="#master" accesskey="n" rel="next">master</a>, Previous: <a href="
 <li> Obsolete <code>flycheck-warning-face</code> and <code>flycheck-error-face</code> in
 favor <code>flycheck-warning</code> and <code>flycheck-error</code> respectively
 </li><li> Obsolete <code>:predicate</code> forms in favor of <code>:predicate</code> functions
+</li><li> <code>flycheck-def-config-file-var</code> does not automatically mark
+variables as safe anymore
 </li></ul>
 
 </li><li> New features:
@@ -669,6 +671,9 @@ Scratch buffers
 </li><li> Predicate forms are now wrapped into functions and compiled into
 functions during byte compilation
 </li><li> Copy each message separately in <code>flycheck-copy-messages-as-kill</code>
+</li><li> Mark some customizable variables as safe for file variable usage, most
+notably <code>flycheck-indication-mode</code>,
+<code>flycheck-highlighting-mode</code> and <code>flycheck-idle-change-delay</code>.
 </li></ul>
 
 </li><li> Bug fixes:
@@ -705,6 +710,8 @@ Previous: <a href="#g_t0_002e13" accesskey="p" rel="previous">0.13</a>, Up: <a h
 <code>flycheck-warning-face</code>
 </li><li> <a href="https://github.com/lunaryorn/flycheck/issues/176">Do not initialize packages by default in <code>emacs-lisp</code>
 syntax checker for non-configuration files</a>
+</li><li> <a href="https://github.com/lunaryorn/flycheck/issues/179">Change the default <code>flycheck-highlighting-mode</code> to
+<code>symbols</code></a>
 </li></ul>
 
 </li><li> New features:
@@ -727,6 +734,8 @@ configure the package directory for the <code>emacs-lisp</code> syntax
 checker</a>
 </li><li> New option filter <code>flycheck-option-comma-separated-list</code> for
 options with comma separated lists as values
+</li><li> <a href="https://github.com/lunaryorn/flycheck/issues/179">New highlighting mode <code>symbols</code> to highlight the
+symbol pointed to by an error</a>
 </li></ul>
 
 </li><li> New syntax checkers:
@@ -755,6 +764,8 @@ releases</a>
 </li><li> <a href="https://github.com/lunaryorn/flycheck/issues/166">Refresh error lists when pressing <kbd>g</kbd></a>
 </li><li> <a href="https://github.com/lunaryorn/flycheck/issues/175">Do not obscure active minibuffer input when displaying
 errors in the echo area</a>
+</li><li> Fix universal prefix argument for <code>flycheck-next-error</code> at
+<code>C-c ! n</code>
 </li></ul>
 
 </li></ul>
